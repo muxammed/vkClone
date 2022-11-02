@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		13AA03DF29129960000BF17C /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13AA03DE29129960000BF17C /* UIViewController+Extension.swift */; };
 		13FDFB1F29120438003DDD1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FDFB1E29120438003DDD1F /* AppDelegate.swift */; };
 		13FDFB2129120438003DDD1F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FDFB2029120438003DDD1F /* SceneDelegate.swift */; };
 		13FDFB2329120438003DDD1F /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FDFB2229120438003DDD1F /* MainViewController.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		13AA03DE29129960000BF17C /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		13FDFB1B29120438003DDD1F /* VKClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13FDFB1E29120438003DDD1F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		13FDFB2029120438003DDD1F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 				13FDFB272912043B003DDD1F /* Assets.xcassets */,
 				13FDFB292912043B003DDD1F /* LaunchScreen.storyboard */,
 				13FDFB2C2912043B003DDD1F /* Info.plist */,
+				13AA03DE29129960000BF17C /* UIViewController+Extension.swift */,
 			);
 			path = VKClone;
 			sourceTree = "<group>";
@@ -209,6 +212,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13AA03DF29129960000BF17C /* UIViewController+Extension.swift in Sources */,
 				13FDFB362912096D003DDD1F /* LoginViewController.swift in Sources */,
 				13FDFB2329120438003DDD1F /* MainViewController.swift in Sources */,
 				13FDFB3A29123793003DDD1F /* FriendsViewCell.swift in Sources */,

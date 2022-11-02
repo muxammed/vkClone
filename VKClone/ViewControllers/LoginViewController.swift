@@ -88,7 +88,11 @@ final class LoginViewController: UIViewController {
         guard let username = usernameTextField.text, username.trimmingCharacters(in: [" "]) == Constants.username,
               let password = passwordTextField.text, password.trimmingCharacters(in: [" "]) == Constants.password
         else {
-            showAlert(title: "", message: Constants.alertMessage)
+            let okeyAction = UIAlertAction(title: Constants.okeyText, style: .default, handler: { [weak self] _ in
+                guard let self = self else { return }
+                self.usernameTextField.becomeFirstResponder()
+            })
+            showAlert(title: "", message: Constants.alertMessage, okeyAction: okeyAction)
             return
         }
 
@@ -148,20 +152,6 @@ extension LoginViewController {
         """
         static let okeyText = "Okey"
         static let isLoggedInText = "isLoggedIn"
-    }
-
-    func showAlert(title: String, message: String) {
-        let alertController = UIAlertController(
-            title: title,
-            message: message,
-            preferredStyle: .alert
-        )
-        let okeyAction = UIAlertAction(title: Constants.okeyText, style: .default, handler: { [weak self] _ in
-            guard let self = self else { return }
-            self.usernameTextField.becomeFirstResponder()
-        })
-        alertController.addAction(okeyAction)
-        present(alertController, animated: true, completion: nil)
     }
 }
 
