@@ -2,7 +2,8 @@
 // Copyright © RoadMap. All rights reserved.
 
 import UIKit
-/// LoginViewController экран логина
+
+/// экран логина
 final class LoginViewController: UIViewController {
     // MARK: - IBOutlets
 
@@ -36,18 +37,17 @@ final class LoginViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        addNotifications()
+        addNotificationsAction()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        removeObserversAction()
     }
 
     // MARK: - Public methods
 
-    @objc private func keyboardWasShown(notification: Notification) {
+    @objc private func keyboardWasShownAction(notification: Notification) {
         if let info = notification.userInfo as NSDictionary?,
            let kbSize = (info.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as? NSValue)?.cgRectValue.size
         {
@@ -69,7 +69,7 @@ final class LoginViewController: UIViewController {
         }
     }
 
-    @objc private func keyboardWillBeHidden(notification: Notification) {
+    @objc private func keyboardWillBeHiddenAction(notification: Notification) {
         let contentInsets = UIEdgeInsets.zero
         scrollView?.contentInset = contentInsets
         imageWidthConstraint.constant = 100
@@ -79,47 +79,47 @@ final class LoginViewController: UIViewController {
         }
     }
 
-    @objc func hideKeyboard() {
+    @objc func hideKeyboardAction() {
         scrollView.endEditing(true)
     }
 
     @IBAction func goToLoginAction(_ sender: Any) {
         scrollView.endEditing(true)
-        if let username = usernameTextField.text, username.trimmingCharacters(in: [" "]) == Constants.username,
-           let password = passwordTextField.text, password.trimmingCharacters(in: [" "]) == Constants.password
-        {
-            UserDefaults.standard.set(true, forKey: Constants.isLoggedInText)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self.dismiss(animated: true, completion: nil)
-            }
-        } else {
-            let alertController = UIAlertController(title: nil, message: Constants.alertMessage, preferredStyle: .alert)
-            let okeyAction = UIAlertAction(title: Constants.okeyText, style: .default, handler: { [weak self] _ in
-                guard let self = self else { return }
-                self.usernameTextField.becomeFirstResponder()
-            })
-            alertController.addAction(okeyAction)
-            present(alertController, animated: true, completion: nil)
+        guard let username = usernameTextField.text, username.trimmingCharacters(in: [" "]) == Constants.username,
+              let password = passwordTextField.text, password.trimmingCharacters(in: [" "]) == Constants.password
+        else {
+            showAlert(title: "", message: Constants.alertMessage)
+            return
+        }
+
+        UserDefaults.standard.set(true, forKey: Constants.isLoggedInText)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.dismiss(animated: true, completion: nil)
         }
     }
 
     // MARK: - Private methods
 
-    private func addNotifications() {
+    private func removeObserversAction() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    private func addNotificationsAction() {
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(keyboardWasShown),
+            selector: #selector(keyboardWasShownAction),
             name:
             UIResponder.keyboardWillShowNotification,
             object: nil
         )
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(keyboardWillBeHidden(notification:)),
+            selector: #selector(keyboardWillBeHiddenAction(notification:)),
             name: UIResponder.keyboardWillHideNotification,
             object: nil
         )
-        let hideKeyboardGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        let hideKeyboardGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboardAction))
         scrollView.addGestureRecognizer(hideKeyboardGesture)
     }
 
@@ -132,7 +132,7 @@ final class LoginViewController: UIViewController {
     }
 }
 
-/// LoginViewController extensions
+/// расширения константы
 extension LoginViewController {
     enum Constants {
         static let ownStrokeColor = "ownStrokeColor"
@@ -149,6 +149,20 @@ extension LoginViewController {
         static let okeyText = "Okey"
         static let isLoggedInText = "isLoggedIn"
     }
+
+    func showAlert(title: String, message: String) {
+        let alertController = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert
+        )
+        let okeyAction = UIAlertAction(title: Constants.okeyText, style: .default, handler: { [weak self] _ in
+            guard let self = self else { return }
+            self.usernameTextField.becomeFirstResponder()
+        })
+        alertController.addAction(okeyAction)
+        present(alertController, animated: true, completion: nil)
+    }
 }
 
 /// UITextFieldDelegate
@@ -158,12 +172,15 @@ extension LoginViewController: UITextFieldDelegate {
         shouldChangeCharactersIn range: NSRange,
         replacementString string: String
     ) -> Bool {
-        guard let text = textField.text else { return true }
-        if usernameTextField.text?.count == 0 || passwordTextField.text?.count == 0 || text.count == 0 {
-            buttonConfiguration.background.backgroundColor = UIColor(named: Constants.ownDisabledColor)
-        } else {
-            buttonConfiguration.background.backgroundColor = UIColor(named: Constants.ownBlueColor)
-        }
+        guard let text = textField.text,
+              case let isTrue = usernameTextField.text?.count == 0 ||
+              passwordTextField.text?.count == 0 ||
+              text.count == 0
+        else { return true }
+        buttonConfiguration.background.backgroundColor = UIColor(
+            named: isTrue ?
+                Constants.ownDisabledColor : Constants.ownBlueColor
+        )
         loginButton.configuration = buttonConfiguration
         view.layoutIfNeeded()
         return true

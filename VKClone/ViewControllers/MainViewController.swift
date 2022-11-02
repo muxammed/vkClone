@@ -2,7 +2,8 @@
 // Copyright © RoadMap. All rights reserved.
 
 import UIKit
-/// MainViewController основной экран с табами
+
+/// экран с табами
 final class MainViewController: UITableViewController {
     // MARK: - Private properties
 
@@ -17,7 +18,7 @@ final class MainViewController: UITableViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        isLoggedIn = UserDefaults.standard.bool(forKey: Constants.isLoggedIn)
+        checkLoggedInAction()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -33,6 +34,10 @@ final class MainViewController: UITableViewController {
         }
     }
 
+    private func checkLoggedInAction() {
+        isLoggedIn = UserDefaults.standard.bool(forKey: Constants.isLoggedIn)
+    }
+
     private func setupViews() {
         navigationItem.title = Constants.friendsTitle
         tableView.register(FriendsViewCell.nib(), forCellReuseIdentifier: FriendsViewCell.identifier)
@@ -44,7 +49,7 @@ extension MainViewController {
     enum Constants {
         static let goToLoginSegueIdentifier = "goToLogin"
         static let isLoggedIn = "isLoggedIn"
-        static let goToPhotos = "goToPhotos"
+        static let goToPhotosText = "goToPhotos"
         static let friendsTitle = "My friends"
     }
 }
@@ -67,6 +72,6 @@ extension MainViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: Constants.goToPhotos, sender: self)
+        performSegue(withIdentifier: Constants.goToPhotosText, sender: self)
     }
 }

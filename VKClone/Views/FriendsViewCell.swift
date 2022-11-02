@@ -2,7 +2,8 @@
 // Copyright © RoadMap. All rights reserved.
 
 import UIKit
-/// FriendsViewCellTableViewCell ячейка таблицы друзей
+
+/// ячейка таблицы друзей
 final class FriendsViewCell: UITableViewCell {
     // MARK: - Public properties
 
@@ -19,6 +20,7 @@ final class FriendsViewCell: UITableViewCell {
     }
 }
 
+/// Константы
 extension FriendsViewCell {
     enum Constants {
         static let FriendsViewCellIdentifier = "FriendsViewCell"
