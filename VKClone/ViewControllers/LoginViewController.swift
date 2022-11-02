@@ -6,14 +6,14 @@ import UIKit
 final class LoginViewController: UIViewController {
     // MARK: - IBOutlets
 
-    @IBOutlet var scrollView: UIScrollView!
-    @IBOutlet var logoImageView: UIImageView!
-    @IBOutlet var loginButton: UIButton!
-    @IBOutlet var inputBackView: UIView!
-    @IBOutlet var usernameTextField: UITextField!
-    @IBOutlet var passwordTextField: UITextField!
-    @IBOutlet var imageWidthConstraint: NSLayoutConstraint!
-    @IBOutlet var imageHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private var scrollView: UIScrollView!
+    @IBOutlet private var logoImageView: UIImageView!
+    @IBOutlet private var loginButton: UIButton!
+    @IBOutlet private var inputBackView: UIView!
+    @IBOutlet private var usernameTextField: UITextField!
+    @IBOutlet private var passwordTextField: UITextField!
+    @IBOutlet private var imageWidthConstraint: NSLayoutConstraint!
+    @IBOutlet private var imageHeightConstraint: NSLayoutConstraint!
 
     // MARK: - Private properties
 
@@ -47,7 +47,7 @@ final class LoginViewController: UIViewController {
 
     // MARK: - Public methods
 
-    @objc func keyboardWasShown(notification: Notification) {
+    @objc private func keyboardWasShown(notification: Notification) {
         if let info = notification.userInfo as NSDictionary?,
            let kbSize = (info.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as? NSValue)?.cgRectValue.size
         {
@@ -69,7 +69,7 @@ final class LoginViewController: UIViewController {
         }
     }
 
-    @objc func keyboardWillBeHidden(notification: Notification) {
+    @objc private func keyboardWillBeHidden(notification: Notification) {
         let contentInsets = UIEdgeInsets.zero
         scrollView?.contentInset = contentInsets
         imageWidthConstraint.constant = 100
@@ -79,12 +79,16 @@ final class LoginViewController: UIViewController {
         }
     }
 
+    @objc func hideKeyboard() {
+        scrollView.endEditing(true)
+    }
+
     @IBAction func goToLoginAction(_ sender: Any) {
         scrollView.endEditing(true)
         if let username = usernameTextField.text, username.trimmingCharacters(in: [" "]) == Constants.username,
            let password = passwordTextField.text, password.trimmingCharacters(in: [" "]) == Constants.password
         {
-            UserDefaults.standard.set(true, forKey: Constants.isLoggedIn)
+            UserDefaults.standard.set(true, forKey: Constants.isLoggedInText)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self.dismiss(animated: true, completion: nil)
             }
@@ -97,10 +101,6 @@ final class LoginViewController: UIViewController {
             alertController.addAction(okeyAction)
             present(alertController, animated: true, completion: nil)
         }
-    }
-
-    @objc func hideKeyboard() {
-        scrollView.endEditing(true)
     }
 
     // MARK: - Private methods
@@ -147,7 +147,7 @@ extension LoginViewController {
         Please try again
         """
         static let okeyText = "Okey"
-        static let isLoggedIn = "isLoggedIn"
+        static let isLoggedInText = "isLoggedIn"
     }
 }
 

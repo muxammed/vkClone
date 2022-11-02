@@ -3,7 +3,7 @@
 
 import UIKit
 /// MainViewController основной экран с табами
-class MainViewController: UITableViewController {
+final class MainViewController: UITableViewController {
     // MARK: - Private properties
 
     private var isLoggedIn = false

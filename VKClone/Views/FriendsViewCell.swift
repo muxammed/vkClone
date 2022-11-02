@@ -6,7 +6,7 @@ import UIKit
 final class FriendsViewCell: UITableViewCell {
     // MARK: - Public properties
 
-    static let identifier = "FriendsViewCell"
+    static let identifier = Constants.FriendsViewCellIdentifier
 
     // MARK: - Public methods
 
@@ -16,5 +16,11 @@ final class FriendsViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+    }
+}
+
+extension FriendsViewCell {
+    enum Constants {
+        static let FriendsViewCellIdentifier = "FriendsViewCell"
     }
 }
