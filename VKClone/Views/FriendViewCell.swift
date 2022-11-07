@@ -17,12 +17,7 @@ final class FriendViewCell: UITableViewCell {
 
     // MARK: - Public methods
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    public func configure(with friend: Friend) {
+    func configure(with friend: Friend) {
         guard let friendNickLabel = friendNickLabel,
               let friendImageView = friendImageView else { return }
         friendNickLabel.text = friend.friendNickName

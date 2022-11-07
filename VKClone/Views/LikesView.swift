@@ -5,12 +5,12 @@ import UIKit
 
 /// вьюв для лайков
 final class LikesView: UIView {
-    // MARK: - Private properties
+    // MARK: - Visual components
 
     private var likeImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.image = UIImage(systemName: "heart")
+        imageView.image = UIImage(systemName: Constants.emptyLikeImageName)
         imageView.isUserInteractionEnabled = true
         imageView.tintColor = .red
         return imageView
@@ -18,11 +18,13 @@ final class LikesView: UIView {
 
     private var likesCountLabel: UILabel = {
         let label = UILabel()
-        label.text = "0"
+        label.text = ""
         label.textColor = .white
         label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         return label
     }()
+
+    // MARK: - Public properties
 
     var likeCount = 0 {
         didSet {
@@ -42,21 +44,21 @@ final class LikesView: UIView {
         layer.cornerRadius = frame.height / 2
     }
 
-    @objc func likeTapped() {
-        if likeImageView.image == UIImage(systemName: "heart") {
-            likeImageView.image = UIImage(systemName: "heart.fill")
+    // MARK: - Private methods
+
+    @objc private func likeTapped() {
+        if likeImageView.image == UIImage(systemName: Constants.emptyLikeImageName) {
+            likeImageView.image = UIImage(systemName: Constants.filledLikeImageName)
             likesCountLabel.textColor = .red
             likeCount += 1
             likesCountLabel.text = "\(likeCount)"
         } else {
-            likeImageView.image = UIImage(systemName: "heart")
+            likeImageView.image = UIImage(systemName: Constants.emptyLikeImageName)
             likesCountLabel.textColor = .white
             likeCount -= 1
             likesCountLabel.text = "\(likeCount)"
         }
     }
-
-    // MARK: - Private methods
 
     private func setupViews() {
         likeImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -85,5 +87,12 @@ final class LikesView: UIView {
             likesCountLabel.leadingAnchor.constraint(equalTo: likeImageView.trailingAnchor, constant: 2),
             likesCountLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 6),
         ])
+    }
+}
+
+extension LikesView {
+    enum Constants {
+        static let emptyLikeImageName = "heart"
+        static let filledLikeImageName = "heart.fill"
     }
 }

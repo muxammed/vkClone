@@ -9,8 +9,16 @@ final class FriendPhotosViewController: UICollectionViewController {
 
     var currentFriend: Friend?
 
+    // MARK: - Life cycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        configNav()
+    }
+
+    // MARK: - Private methods
+
+    private func configNav() {
         guard let currentFriend = currentFriend else {
             return
         }

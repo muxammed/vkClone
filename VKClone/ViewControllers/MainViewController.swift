@@ -29,10 +29,17 @@ final class MainViewController: UITableViewController {
         checkLoggedIn()
     }
 
+    // MARK: - Public methods
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let friendPhotosViewController = segue.destination as? FriendPhotosViewController else { return }
+        friendPhotosViewController.currentFriend = selectedFriend
+    }
+
     // MARK: - Private methods
 
     private func loadDummyFriends() {
-        var friend = Friend(
+        myFriends = [Friend(
             friendNickName: "Friend",
             friendImageName: Constants.friendImageNameText,
             friendGroupName: "",
@@ -41,9 +48,7 @@ final class MainViewController: UITableViewController {
                 Photo(photoName: "photo2", likesCount: 1),
                 Photo(photoName: "photo3", likesCount: 12)
             ]
-        )
-        myFriends.append(friend)
-        friend = Friend(
+        ), Friend(
             friendNickName: "Friend2",
             friendImageName: Constants.friendImageNameText,
             friendGroupName: "",
@@ -52,9 +57,7 @@ final class MainViewController: UITableViewController {
                 Photo(photoName: "photo5", likesCount: 14),
                 Photo(photoName: "photo6", likesCount: 13)
             ]
-        )
-        myFriends.append(friend)
-        friend = Friend(
+        ), Friend(
             friendNickName: "Friend3",
             friendImageName: Constants.friendImageNameText,
             friendGroupName: "Команда ВКонтакте",
@@ -63,9 +66,7 @@ final class MainViewController: UITableViewController {
                 Photo(photoName: "photo1", likesCount: 16),
                 Photo(photoName: "photo2", likesCount: 18)
             ]
-        )
-        myFriends.append(friend)
-        friend = Friend(
+        ), Friend(
             friendNickName: "Friend4",
             friendImageName: Constants.friendImageNameText,
             friendGroupName: "",
@@ -74,9 +75,7 @@ final class MainViewController: UITableViewController {
                 Photo(photoName: "photo4", likesCount: 15),
                 Photo(photoName: "photo5", likesCount: 19)
             ]
-        )
-        myFriends.append(friend)
-        friend = Friend(
+        ), Friend(
             friendNickName: "Friend5",
             friendImageName: Constants.friendImageNameText,
             friendGroupName: "Команда ВКонтакте",
@@ -85,9 +84,7 @@ final class MainViewController: UITableViewController {
                 Photo(photoName: "photo7", likesCount: 10),
                 Photo(photoName: "photo1", likesCount: 10)
             ]
-        )
-        myFriends.append(friend)
-        friend = Friend(
+        ), Friend(
             friendNickName: "Friend6",
             friendImageName: Constants.friendImageNameText,
             friendGroupName: "",
@@ -96,8 +93,7 @@ final class MainViewController: UITableViewController {
                 Photo(photoName: "photo3", likesCount: 10),
                 Photo(photoName: "photo4", likesCount: 10)
             ]
-        )
-        myFriends.append(friend)
+        )]
         tableView.reloadData()
     }
 
@@ -114,11 +110,6 @@ final class MainViewController: UITableViewController {
     private func setupViews() {
         navigationItem.title = Constants.friendsTitle
     }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let friendPhotosViewController = segue.destination as? FriendPhotosViewController else { return }
-        friendPhotosViewController.currentFriend = selectedFriend
-    }
 }
 
 /// Constants
@@ -129,6 +120,7 @@ extension MainViewController {
         static let goToPhotosText = "goToPhotos"
         static let friendsTitle = "My friends"
         static let friendImageNameText = "friend2"
+        static let goToPhotosSegueName = "goToPhotos"
     }
 }
 
@@ -151,6 +143,6 @@ extension MainViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedFriend = myFriends[indexPath.item]
-        performSegue(withIdentifier: "goToPhotos", sender: self)
+        performSegue(withIdentifier: Constants.goToPhotosSegueName, sender: self)
     }
 }

@@ -12,18 +12,20 @@ final class PhotoViewCell: UICollectionViewCell {
 
     // MARK: - Public properties
 
-    static let identifier = "PhotoViewCell"
+    static let identifier = Constants.photoViewCellIdentifier
 
     // MARK: - Public methods
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    public func configure(with photoName: String, likesCount: Int) {
+    func configure(with photoName: String, likesCount: Int) {
         photoImageView.image = UIImage(named: photoName)
         likesView.likeCount = likesCount
         likesView.layoutIfNeeded()
+    }
+}
+
+/// константы
+extension PhotoViewCell {
+    enum Constants {
+        static let photoViewCellIdentifier = "PhotoViewCell"
     }
 }

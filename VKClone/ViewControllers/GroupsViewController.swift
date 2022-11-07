@@ -16,8 +16,10 @@ final class GroupsViewController: UIViewController {
 
     // MARK: - Public properties
 
-    public var groups: [Group]?
-    public var user: User?
+    var groups: [Group]?
+    var user: User?
+
+    // MARK: - Life cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +28,7 @@ final class GroupsViewController: UIViewController {
 
     // MARK: - IBActions
 
-    @IBAction func backToMyGroups(_ unwindSegue: UIStoryboardSegue) {
+    @IBAction private func backToMyGroups(_ unwindSegue: UIStoryboardSegue) {
         guard let myGroupsViewController = unwindSegue.source as? MyGroupsViewController
         else {
             return
@@ -36,10 +38,6 @@ final class GroupsViewController: UIViewController {
         myGroupsViewController.tableView.reloadData()
         dismiss(animated: true, completion: nil)
         navigationController?.popViewController(animated: true)
-    }
-
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        true
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -84,9 +82,15 @@ extension GroupsViewController: JoinGroupDelegate {
         self.groups = groups
         tableView.deleteRows(at: [indexPath], with: .top)
         tableView.reloadData()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
-            guard let self = self else { return }
-            self.performSegue(withIdentifier: "goToMyGroups", sender: self)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.performSegue(withIdentifier: Constants.goToMyGroupsSeguaName, sender: self)
         }
+    }
+}
+
+/// константы
+extension GroupsViewController {
+    enum Constants {
+        static let goToMyGroupsSeguaName = "goToMyGroups"
     }
 }

@@ -13,8 +13,8 @@ final class GroupViewCell: UITableViewCell {
 
     // MARK: - Public properties
 
-    static let identifier = "GroupViewCell"
-    public var delegate: JoinGroupDelegate?
+    static let identifier = Constants.groupViewCellIdentifier
+    var delegate: JoinGroupDelegate?
 
     // MARK: - Private properties
 
@@ -23,15 +23,11 @@ final class GroupViewCell: UITableViewCell {
 
     // MARK: - Public methods
 
-    public static func nib() -> UINib {
+    static func nib() -> UINib {
         UINib(nibName: GroupViewCell.identifier, bundle: nil)
     }
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-
-    public func configure(with group: Group, isJoined: Bool, indexPath: IndexPath) {
+    func configure(with group: Group, isJoined: Bool, indexPath: IndexPath) {
         groupNameLabel.text = group.groupName
         groupImageView.image = UIImage(named: group.groupImageName)
         joinButton.isHidden = isJoined
@@ -40,10 +36,19 @@ final class GroupViewCell: UITableViewCell {
         currentIndexPath = indexPath
     }
 
-    @objc func joinButtonAction() {
+    // MARK: - Private methods
+
+    @objc private func joinButtonAction() {
         guard let delegate = delegate,
               let currentGroup = currentGroup,
               let indexPath = currentIndexPath else { return }
         delegate.joinGroup(group: currentGroup, indexPath: indexPath)
+    }
+}
+
+/// Константы
+extension GroupViewCell {
+    enum Constants {
+        static let groupViewCellIdentifier = "GroupViewCell"
     }
 }

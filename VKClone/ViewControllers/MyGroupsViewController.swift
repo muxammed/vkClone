@@ -25,7 +25,7 @@ final class MyGroupsViewController: UITableViewController {
     }
 
     @IBAction func goToGroupsAction(_ sender: Any) {
-        performSegue(withIdentifier: "goToGroups", sender: self)
+        performSegue(withIdentifier: Constants.goToGroupsSegueName, sender: self)
     }
 
     // MARK: - Public methods
@@ -46,30 +46,26 @@ final class MyGroupsViewController: UITableViewController {
     }
 
     private func fillDummyUser() {
-        currentUser = User(username: "muxammed", joinedGroups: [])
-        guard var currentUser = currentUser else {
-            return
-        }
-
+        currentUser = User(username: Constants.userName, joinedGroups: [])
         for ind in 0 ... 7 {
-            let group = Group(groupName: "group\(ind)", groupImageName: "photo\(ind)")
-            currentUser.joinedGroups.append(group)
+            let group = Group(
+                groupName: Constants.joinedGroupPrefix + "\(ind)",
+                groupImageName: Constants.groupPhotoPrefix + "\(ind)"
+            )
+            currentUser?.joinedGroups.append(group)
         }
-        self.currentUser = currentUser
         tableView.reloadData()
     }
 
     private func fillDummyGroups() {
         otherGroups = [Group]()
-        guard var otherGroups = otherGroups else {
-            return
-        }
-
         for ind in 0 ... 7 {
-            let group = Group(groupName: "notJoinedGroup\(ind)", groupImageName: "photo\(ind)")
-            otherGroups.append(group)
+            let group = Group(
+                groupName: Constants.notJoinedGroupPrefix + "\(ind)",
+                groupImageName: Constants.groupPhotoPrefix + "\(ind)"
+            )
+            otherGroups?.append(group)
         }
-        self.otherGroups = otherGroups
     }
 }
 
@@ -91,9 +87,10 @@ extension MyGroupsViewController {
         return UITableViewCell()
     }
 
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        true
-    }
+//
+//    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+//        true
+//    }
 
     override func tableView(
         _ tableView: UITableView,
@@ -109,5 +106,16 @@ extension MyGroupsViewController {
             self.currentUser = currentUser
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
+    }
+}
+
+/// Константы
+extension MyGroupsViewController {
+    enum Constants {
+        static let goToGroupsSegueName = "goToGroups"
+        static let userName = "muxammed"
+        static let joinedGroupPrefix = "group"
+        static let groupPhotoPrefix = "photo"
+        static let notJoinedGroupPrefix = "notJoinedGroup"
     }
 }
