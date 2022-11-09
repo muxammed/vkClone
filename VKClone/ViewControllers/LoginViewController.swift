@@ -47,6 +47,27 @@ final class LoginViewController: UIViewController {
 
     // MARK: - Public methods
 
+    @IBAction func goToLoginAction(_ sender: Any) {
+        scrollView.endEditing(true)
+        guard let username = usernameTextField.text, username.trimmingCharacters(in: [" "]) == Constants.username,
+              let password = passwordTextField.text, password.trimmingCharacters(in: [" "]) == Constants.password
+        else {
+            let okeyAction = UIAlertAction(title: Constants.okeyText, style: .default, handler: { [weak self] _ in
+                guard let self = self else { return }
+                self.usernameTextField.becomeFirstResponder()
+            })
+            showAlert(title: "", message: Constants.alertMessage, okeyAction: okeyAction)
+            return
+        }
+
+        UserDefaults.standard.set(true, forKey: Constants.isLoggedInText)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+
+    // MARK: - Private methods
+
     @objc private func keyboardWasShownAction(notification: Notification) {
         if let info = notification.userInfo as NSDictionary?,
            let kbSize = (info.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as? NSValue)?.cgRectValue.size
@@ -79,30 +100,9 @@ final class LoginViewController: UIViewController {
         }
     }
 
-    @objc func hideKeyboardAction() {
+    @objc private func hideKeyboardAction() {
         scrollView.endEditing(true)
     }
-
-    @IBAction func goToLoginAction(_ sender: Any) {
-        scrollView.endEditing(true)
-        guard let username = usernameTextField.text, username.trimmingCharacters(in: [" "]) == Constants.username,
-              let password = passwordTextField.text, password.trimmingCharacters(in: [" "]) == Constants.password
-        else {
-            let okeyAction = UIAlertAction(title: Constants.okeyText, style: .default, handler: { [weak self] _ in
-                guard let self = self else { return }
-                self.usernameTextField.becomeFirstResponder()
-            })
-            showAlert(title: "", message: Constants.alertMessage, okeyAction: okeyAction)
-            return
-        }
-
-        UserDefaults.standard.set(true, forKey: Constants.isLoggedInText)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.dismiss(animated: true, completion: nil)
-        }
-    }
-
-    // MARK: - Private methods
 
     private func removeObserversAction() {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -136,7 +136,7 @@ final class LoginViewController: UIViewController {
     }
 }
 
-/// расширения константы
+/// константы
 extension LoginViewController {
     enum Constants {
         static let ownStrokeColor = "ownStrokeColor"

@@ -1,7 +1,7 @@
 // Friend.swift
 // Copyright © RoadMap. All rights reserved.
 
-/// модель друзей
+/// друг
 struct Friend {
     let friendNickName: String
     let friendImageName: String
@@ -9,7 +9,18 @@ struct Friend {
     let photos: [Photo]
 }
 
-/// модель фотографий
+/// для удобного выявления уникальных первых букв в имени друга
+extension Friend: Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(friendNickName.first)
+    }
+
+    static func == (lhs: Friend, rhs: Friend) -> Bool {
+        lhs.friendNickName.first == rhs.friendNickName.first
+    }
+}
+
+/// фотографий
 struct Photo {
     let photoName: String
     let likesCount: Int

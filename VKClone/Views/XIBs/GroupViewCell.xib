@@ -87,6 +87,7 @@
                     <constraint firstItem="mI3-g7-jQj" firstAttribute="centerY" secondItem="N5k-XD-vnd" secondAttribute="centerY" id="jnh-bq-XKh"/>
                     <constraint firstItem="x6u-Qt-Apq" firstAttribute="leading" secondItem="MRJ-5n-i7i" secondAttribute="trailing" constant="12" id="kiE-UY-Ip7"/>
                     <constraint firstItem="x6u-Qt-Apq" firstAttribute="centerY" secondItem="N5k-XD-vnd" secondAttribute="centerY" id="tqb-KK-Iua"/>
+                    <constraint firstItem="MRJ-5n-i7i" firstAttribute="centerY" secondItem="N5k-XD-vnd" secondAttribute="centerY" id="u8q-Hn-F7O"/>
                     <constraint firstAttribute="trailing" secondItem="mI3-g7-jQj" secondAttribute="trailing" constant="12" id="uhF-e7-UwK"/>
                     <constraint firstItem="YXG-Hd-bsN" firstAttribute="top" secondItem="N5k-XD-vnd" secondAttribute="top" constant="6" id="vzi-aA-NnP"/>
                 </constraints>
@@ -94,6 +95,8 @@
             <connections>
                 <outlet property="groupImageView" destination="MRJ-5n-i7i" id="hLT-z1-obJ"/>
                 <outlet property="groupNameLabel" destination="x6u-Qt-Apq" id="thT-Uj-V3O"/>
+                <outlet property="imageViewHeightConstraint" destination="nUW-ML-f38" id="j79-bS-p3H"/>
+                <outlet property="imageViewWidthConstraint" destination="0PV-Hf-fk7" id="aew-YO-qjQ"/>
                 <outlet property="joinButton" destination="mI3-g7-jQj" id="OZN-99-6Ba"/>
             </connections>
             <point key="canvasLocation" x="139" y="88"/>

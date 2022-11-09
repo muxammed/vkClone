@@ -23,9 +23,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="KoH-TZ-Ktt" customClass="MyFriendsHeaderView" customModule="VKClone" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="390" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <searchBar contentMode="redraw" fixedFrame="YES" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eyD-fM-p9L">
+                                    <rect key="frame" x="0.0" y="0.0" width="390" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="eEb-Wo-Skd" id="2Jd-oc-ewb"/>
+                                    </connections>
+                                </searchBar>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <connections>
+                                <outlet property="friendSearchBar" destination="eyD-fM-p9L" id="gdO-UI-y08"/>
+                            </connections>
+                        </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FriendViewCell" rowHeight="60" id="nl7-TD-Sry" customClass="FriendViewCell" customModule="VKClone" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="44.666666030883789" width="390" height="60"/>
+                                <rect key="frame" x="0.0" y="88.666666030883789" width="390" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nl7-TD-Sry" id="GZD-Kf-fP0">
                                     <rect key="frame" x="0.0" y="0.0" width="390" height="60"/>
@@ -106,9 +124,11 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="callButton" destination="d1t-FO-Uiu" id="DBQ-Pg-led"/>
                                     <outlet property="friendGroupLabel" destination="dMA-x1-47X" id="4nX-2S-JTX"/>
                                     <outlet property="friendImageView" destination="gdQ-K3-tuq" id="an0-1B-EWB"/>
                                     <outlet property="friendNickLabel" destination="UAO-5s-8aw" id="NhG-qG-yFj"/>
+                                    <outlet property="messageButton" destination="kr3-N6-JWo" id="1Dk-Ut-Uui"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -127,7 +147,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x4B-ur-LyF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2623.0769230769229" y="-188.38862559241704"/>
+            <point key="canvasLocation" x="3552.3076923076924" y="-188.38862559241704"/>
         </scene>
         <!--Friend Photos View Controller-->
         <scene sceneID="nm9-tx-e7B">
@@ -188,7 +208,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bh2-Qd-Kac" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3567.6923076923076" y="-188.38862559241704"/>
+            <point key="canvasLocation" x="4496.9230769230771" y="-188.38862559241704"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="3kR-ja-0vP">
@@ -395,11 +415,12 @@
                     <connections>
                         <segue destination="lcK-Te-1MN" kind="relationship" relationship="viewControllers" id="c8D-VI-sY5"/>
                         <segue destination="iUN-1A-y5E" kind="relationship" relationship="viewControllers" id="Bf4-Fe-04B"/>
+                        <segue destination="bpV-0E-4m3" kind="relationship" relationship="viewControllers" id="oIP-VY-p0c"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hhI-dd-SUU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="976.92307692307691" y="-188.38862559241704"/>
+            <point key="canvasLocation" x="1906.1538461538462" y="-188.38862559241704"/>
         </scene>
         <!--Friends-->
         <scene sceneID="MaE-f6-BgZ">
@@ -418,7 +439,59 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="esy-sx-PTJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1823.0769230769231" y="-188.38862559241704"/>
+            <point key="canvasLocation" x="2752.3076923076924" y="-188.38862559241704"/>
+        </scene>
+        <!--News-->
+        <scene sceneID="Mvl-yI-Xny">
+            <objects>
+                <tableViewController title="News" id="H0n-Fb-4ZE" customClass="NewsViewController" customModule="VKClone" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="wSM-tZ-VF4">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <connections>
+                            <outlet property="dataSource" destination="H0n-Fb-4ZE" id="Kaq-48-Ffj"/>
+                            <outlet property="delegate" destination="H0n-Fb-4ZE" id="qSp-KI-opT"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="News" id="w7r-gs-48A"/>
+                    <connections>
+                        <segue destination="4JB-we-O3Y" kind="show" identifier="goToPhotoGallerySegue" id="clr-7y-kvZ"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="M8t-7t-MG0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-795.38461538461536" y="-212.55924170616112"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="ubx-Ur-07v">
+            <objects>
+                <viewController id="4JB-we-O3Y" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="V2l-oe-znx">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Rr-da-Twp" customClass="LoadingView" customModule="VKClone" customModuleProvider="target">
+                                <rect key="frame" x="170" y="412" width="50" height="20"/>
+                                <color key="backgroundColor" systemColor="systemBrownColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="E8b-xl-XuY"/>
+                                    <constraint firstAttribute="width" constant="50" id="VBQ-Dw-92d"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="b6i-sn-dID"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="7Rr-da-Twp" firstAttribute="centerY" secondItem="V2l-oe-znx" secondAttribute="centerY" id="fO2-ho-EEs"/>
+                            <constraint firstItem="7Rr-da-Twp" firstAttribute="centerX" secondItem="V2l-oe-znx" secondAttribute="centerX" id="gnb-Tv-7mu"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="OLm-Ix-Ya0"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WAF-BX-3ij" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="447" y="-655"/>
         </scene>
         <!--Groups-->
         <scene sceneID="JLL-aR-8mi">
@@ -439,10 +512,30 @@
             </objects>
             <point key="canvasLocation" x="-488" y="545"/>
         </scene>
+        <!--News-->
+        <scene sceneID="6Fe-Yh-Yyr">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bpV-0E-4m3" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="News" image="newspaper" catalog="system" id="qoZ-he-Dpg"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3zX-w5-qcf">
+                        <rect key="frame" x="0.0" y="44" width="390" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="H0n-Fb-4ZE" kind="relationship" relationship="rootViewController" id="BhP-zE-Gdt"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="29e-LK-d2b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1724.6153846153845" y="-212.55924170616112"/>
+        </scene>
     </scenes>
     <resources>
         <image name="logo_vk" width="72" height="72"/>
         <image name="message_outline_28" width="29" height="28"/>
+        <image name="newspaper" catalog="system" width="128" height="111"/>
         <image name="phone_outline_56" width="57" height="56"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="users_outline_28" width="28" height="28"/>
@@ -463,6 +556,9 @@
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBrownColor">
+            <color red="0.63529411764705879" green="0.51764705882352946" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

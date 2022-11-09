@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SFProDisplay-Semibold.ttf">
+            <string>SFProDisplay-Semibold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ReactionView" customModule="VKClone" customModuleProvider="target">
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="string" keyPath="caption" value="1"/>
+                <userDefinedRuntimeAttribute type="image" keyPath="image" value="clip_outline_28"/>
+            </userDefinedRuntimeAttributes>
+            <connections>
+                <outlet property="labelLeadigConstraint" destination="iYJ-3E-rB4" id="dPF-X3-kvv"/>
+                <outlet property="labelViewWidthConstraint" destination="sQP-Kz-2c2" id="tOD-DH-3xT"/>
+                <outlet property="reactionImageView" destination="pnO-04-TQt" id="2sY-HY-MlD"/>
+                <outlet property="reactionLabel" destination="b6g-PB-NWC" id="NbN-Yi-uct"/>
+                <outlet property="reactionView" destination="Jhr-DN-CkH" id="VAi-2U-TbW"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" id="Jhr-DN-CkH">
+            <rect key="frame" x="0.0" y="0.0" width="51" height="36"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="500" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pnO-04-TQt">
+                    <rect key="frame" x="12" y="5" width="26" height="26"/>
+                    <color key="tintColor" name="ownGrayColor"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="pnO-04-TQt" secondAttribute="height" multiplier="1:1" id="fVD-gZ-8GO"/>
+                    </constraints>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oBc-6o-Aay">
+                    <rect key="frame" x="39" y="2" width="0.0" height="32"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="b6g-PB-NWC">
+                            <rect key="frame" x="2" y="1" width="0.0" height="30"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
+                            <color key="textColor" name="ownGrayColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="b6g-PB-NWC" secondAttribute="bottom" constant="1" id="Gmf-8E-Hgy"/>
+                        <constraint firstItem="b6g-PB-NWC" firstAttribute="leading" secondItem="oBc-6o-Aay" secondAttribute="leading" id="fKL-up-jIz"/>
+                        <constraint firstItem="b6g-PB-NWC" firstAttribute="top" secondItem="oBc-6o-Aay" secondAttribute="top" constant="1" id="hAY-5k-lhx"/>
+                        <constraint firstAttribute="trailing" secondItem="b6g-PB-NWC" secondAttribute="trailing" id="lkQ-f3-ZbC"/>
+                        <constraint firstAttribute="width" priority="700" id="sQP-Kz-2c2"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="TwP-IG-8P5"/>
+            <color key="backgroundColor" name="reactionBackColor"/>
+            <constraints>
+                <constraint firstItem="TwP-IG-8P5" firstAttribute="trailing" secondItem="pnO-04-TQt" secondAttribute="trailing" priority="900" constant="13" id="7Hr-oX-frk"/>
+                <constraint firstAttribute="trailing" secondItem="oBc-6o-Aay" secondAttribute="trailing" constant="12" id="BZb-dJ-fII"/>
+                <constraint firstItem="TwP-IG-8P5" firstAttribute="bottom" secondItem="oBc-6o-Aay" secondAttribute="bottom" constant="2" id="Jih-v0-nDy"/>
+                <constraint firstItem="oBc-6o-Aay" firstAttribute="top" secondItem="Jhr-DN-CkH" secondAttribute="top" constant="2" id="aDQ-Jc-4Gu"/>
+                <constraint firstAttribute="bottom" secondItem="pnO-04-TQt" secondAttribute="bottom" constant="5" id="b1W-4K-9Xo"/>
+                <constraint firstItem="pnO-04-TQt" firstAttribute="leading" secondItem="Jhr-DN-CkH" secondAttribute="leading" constant="12" id="haU-SL-grD"/>
+                <constraint firstItem="oBc-6o-Aay" firstAttribute="leading" secondItem="pnO-04-TQt" secondAttribute="trailing" priority="900" constant="4" id="iYJ-3E-rB4"/>
+                <constraint firstItem="oBc-6o-Aay" firstAttribute="centerY" secondItem="pnO-04-TQt" secondAttribute="centerY" id="jHG-Rc-UQQ"/>
+                <constraint firstItem="pnO-04-TQt" firstAttribute="top" secondItem="Jhr-DN-CkH" secondAttribute="top" constant="5" id="zTF-xU-abA"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="176.08695652173915" y="-211.60714285714286"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="clip_outline_28" width="29" height="28"/>
+        <namedColor name="ownGrayColor">
+            <color red="0.50588235294117645" green="0.5490196078431373" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="reactionBackColor">
+            <color red="0.93725490196078431" green="0.93725490196078431" blue="0.93725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

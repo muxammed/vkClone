@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		130007222919CF7000659E31 /* LetterFriend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130007212919CF7000659E31 /* LetterFriend.swift */; };
+		130007242919D9F700659E31 /* MyFriendsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130007232919D9F700659E31 /* MyFriendsHeaderView.swift */; };
+		130007262919E61F00659E31 /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130007252919E61F00659E31 /* News.swift */; };
+		130007282919E77D00659E31 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130007272919E77D00659E31 /* NewsViewController.swift */; };
+		1300072A2919EB4200659E31 /* NewsViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 130007292919EB4200659E31 /* NewsViewCell.xib */; };
+		130007312919EF8C00659E31 /* ReactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130007302919EF8C00659E31 /* ReactionView.swift */; };
+		130007332919F42A00659E31 /* NewsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130007322919F42A00659E31 /* NewsViewCell.swift */; };
+		131CD430291AC59D000578B0 /* ReactionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 131CD42F291AC59D000578B0 /* ReactionView.xib */; };
+		13991A97291BED6A00A21DEB /* LoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13991A96291BED6A00A21DEB /* LoadingView.xib */; };
+		13991A9B291BFBFF00A21DEB /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13991A9A291BFBFF00A21DEB /* LoadingView.swift */; };
 		13AA03DF29129960000BF17C /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13AA03DE29129960000BF17C /* UIViewController+Extension.swift */; };
 		13F7BAF129183B5000A10E05 /* SFProDisplay-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 13F7BAEF29183B5000A10E05 /* SFProDisplay-Semibold.ttf */; };
 		13F7BAF229183B5000A10E05 /* SFProDisplay-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 13F7BAF029183B5000A10E05 /* SFProDisplay-Regular.ttf */; };
@@ -33,6 +43,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		130007212919CF7000659E31 /* LetterFriend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterFriend.swift; sourceTree = "<group>"; };
+		130007232919D9F700659E31 /* MyFriendsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFriendsHeaderView.swift; sourceTree = "<group>"; };
+		130007252919E61F00659E31 /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
+		130007272919E77D00659E31 /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
+		130007292919EB4200659E31 /* NewsViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsViewCell.xib; sourceTree = "<group>"; };
+		130007302919EF8C00659E31 /* ReactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionView.swift; sourceTree = "<group>"; };
+		130007322919F42A00659E31 /* NewsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewCell.swift; sourceTree = "<group>"; };
+		131CD42F291AC59D000578B0 /* ReactionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReactionView.xib; sourceTree = "<group>"; };
+		13991A96291BED6A00A21DEB /* LoadingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingView.xib; sourceTree = "<group>"; };
+		13991A9A291BFBFF00A21DEB /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		13AA03DE29129960000BF17C /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		13F7BAEF29183B5000A10E05 /* SFProDisplay-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Semibold.ttf"; sourceTree = "<group>"; };
 		13F7BAF029183B5000A10E05 /* SFProDisplay-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Regular.ttf"; sourceTree = "<group>"; };
@@ -71,6 +91,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1300072D2919EE7A00659E31 /* XIBs */ = {
+			isa = PBXGroup;
+			children = (
+				13F7BB0A2918A36200A10E05 /* GroupViewCell.xib */,
+				130007292919EB4200659E31 /* NewsViewCell.xib */,
+				131CD42F291AC59D000578B0 /* ReactionView.xib */,
+				13991A96291BED6A00A21DEB /* LoadingView.xib */,
+			);
+			path = XIBs;
+			sourceTree = "<group>";
+		};
 		13F7BAEE2918382000A10E05 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -86,6 +117,8 @@
 				13F7BAF42918456800A10E05 /* Friend.swift */,
 				13F7BB002918971200A10E05 /* Group.swift */,
 				13F7BB0229189A2600A10E05 /* User.swift */,
+				130007212919CF7000659E31 /* LetterFriend.swift */,
+				130007252919E61F00659E31 /* News.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -133,6 +166,7 @@
 				13F7BAF829184B0C00A10E05 /* MyGroupsViewController.swift */,
 				13F7BAFC29185C6000A10E05 /* FriendPhotosViewController.swift */,
 				13F7BB042918A18400A10E05 /* GroupsViewController.swift */,
+				130007272919E77D00659E31 /* NewsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -140,12 +174,16 @@
 		13FDFB3B2912379A003DDD1F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1300072D2919EE7A00659E31 /* XIBs */,
 				13F7BAF62918488300A10E05 /* GroupViewCell.swift */,
 				13F7BAFA2918518300A10E05 /* FriendViewCell.swift */,
+				13991A9A291BFBFF00A21DEB /* LoadingView.swift */,
 				13F7BAFE29187B8200A10E05 /* PhotoViewCell.swift */,
-				13F7BB0A2918A36200A10E05 /* GroupViewCell.xib */,
 				13F7BB0C2918DAF400A10E05 /* ImageViewBackView.swift */,
 				13F7BB0E2918DCA300A10E05 /* LikesView.swift */,
+				130007232919D9F700659E31 /* MyFriendsHeaderView.swift */,
+				130007302919EF8C00659E31 /* ReactionView.swift */,
+				130007322919F42A00659E31 /* NewsViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -211,12 +249,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				13FDFB2B2912043B003DDD1F /* LaunchScreen.storyboard in Resources */,
+				1300072A2919EB4200659E31 /* NewsViewCell.xib in Resources */,
 				13F7BB0B2918A36200A10E05 /* GroupViewCell.xib in Resources */,
 				13F7BAF129183B5000A10E05 /* SFProDisplay-Semibold.ttf in Resources */,
 				13FDFB3829120C97003DDD1F /* Colors.xcassets in Resources */,
+				131CD430291AC59D000578B0 /* ReactionView.xib in Resources */,
 				13F7BAF229183B5000A10E05 /* SFProDisplay-Regular.ttf in Resources */,
 				13FDFB282912043B003DDD1F /* Assets.xcassets in Resources */,
 				13FDFB2629120438003DDD1F /* Main.storyboard in Resources */,
+				13991A97291BED6A00A21DEB /* LoadingView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,9 +310,15 @@
 				13F7BB052918A18400A10E05 /* GroupsViewController.swift in Sources */,
 				13F7BB0329189A2600A10E05 /* User.swift in Sources */,
 				13AA03DF29129960000BF17C /* UIViewController+Extension.swift in Sources */,
+				130007332919F42A00659E31 /* NewsViewCell.swift in Sources */,
+				130007282919E77D00659E31 /* NewsViewController.swift in Sources */,
+				130007312919EF8C00659E31 /* ReactionView.swift in Sources */,
 				13F7BAF52918456800A10E05 /* Friend.swift in Sources */,
 				13F7BB0D2918DAF400A10E05 /* ImageViewBackView.swift in Sources */,
+				130007222919CF7000659E31 /* LetterFriend.swift in Sources */,
 				13F7BAFD29185C6000A10E05 /* FriendPhotosViewController.swift in Sources */,
+				130007242919D9F700659E31 /* MyFriendsHeaderView.swift in Sources */,
+				130007262919E61F00659E31 /* News.swift in Sources */,
 				13F7BB012918971200A10E05 /* Group.swift in Sources */,
 				13FDFB362912096D003DDD1F /* LoginViewController.swift in Sources */,
 				13FDFB2329120438003DDD1F /* MainViewController.swift in Sources */,
@@ -282,6 +329,7 @@
 				13F7BB0F2918DCA300A10E05 /* LikesView.swift in Sources */,
 				13F7BAFB2918518300A10E05 /* FriendViewCell.swift in Sources */,
 				13F7BAFF29187B8200A10E05 /* PhotoViewCell.swift in Sources */,
+				13991A9B291BFBFF00A21DEB /* LoadingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

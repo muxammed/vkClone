@@ -40,6 +40,8 @@ final class GroupsViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
 
+    // MARK: - Public methods
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let myGroupsViewController = segue.destination as? MyGroupsViewController else { return }
         myGroupsViewController.otherGroups = groups
