@@ -7,9 +7,9 @@ import UIKit
 final class LoadingView: UIView {
     // MARK: - IBOutlets
 
-    @IBOutlet private var firstDot: UIView!
-    @IBOutlet private var secondDot: UIView!
-    @IBOutlet private var thirdDot: UIView!
+    @IBOutlet private var firstDotView: UIView!
+    @IBOutlet private var secondDotView: UIView!
+    @IBOutlet private var thirdDotView: UIView!
     @IBOutlet private var loadingView: UIView!
 
     // MARK: - Initialisators
@@ -28,6 +28,14 @@ final class LoadingView: UIView {
         let bundle = Bundle(for: ReactionView.self)
         bundle.loadNibNamed(Constants.loadingViewNibName, owner: self, options: nil)
         addSubview(loadingView)
+        loadingViewConstraints()
+        frame = bounds
+        clipsToBounds = true
+        loadingView.clipsToBounds = true
+        startAnimationAction()
+    }
+
+    private func loadingViewConstraints() {
         loadingView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             loadingView.topAnchor.constraint(equalTo: topAnchor),
@@ -35,26 +43,22 @@ final class LoadingView: UIView {
             loadingView.bottomAnchor.constraint(equalTo: bottomAnchor),
             loadingView.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
-        frame = bounds
-        clipsToBounds = true
-        loadingView.clipsToBounds = true
-        startAnimationAction()
     }
 
     private func startAnimationAction() {
         UIView.animate(withDuration: 0.5, delay: 0, options: []) {
-            self.firstDot.backgroundColor = UIColor(named: Constants.finalColorName)
+            self.firstDotView.backgroundColor = UIColor(named: Constants.finalColorName)
         } completion: { _ in
             UIView.animate(withDuration: 0.5, delay: 0, options: []) {
-                self.firstDot.backgroundColor = UIColor(named: Constants.initialColorName)
-                self.secondDot.backgroundColor = UIColor(named: Constants.finalColorName)
+                self.firstDotView.backgroundColor = UIColor(named: Constants.initialColorName)
+                self.secondDotView.backgroundColor = UIColor(named: Constants.finalColorName)
             } completion: { _ in
                 UIView.animate(withDuration: 0.5, delay: 0, options: []) {
-                    self.secondDot.backgroundColor = UIColor(named: Constants.initialColorName)
-                    self.thirdDot.backgroundColor = UIColor(named: Constants.finalColorName)
+                    self.secondDotView.backgroundColor = UIColor(named: Constants.initialColorName)
+                    self.thirdDotView.backgroundColor = UIColor(named: Constants.finalColorName)
                 } completion: { _ in
                     UIView.animate(withDuration: 0.5, delay: 0, options: []) {
-                        self.thirdDot.backgroundColor = UIColor(named: Constants.initialColorName)
+                        self.thirdDotView.backgroundColor = UIColor(named: Constants.initialColorName)
 
                     } completion: { _ in
                         self.startAnimationAction()
@@ -65,6 +69,7 @@ final class LoadingView: UIView {
     }
 }
 
+/// константы
 extension LoadingView {
     enum Constants {
         static let initialColorName = "ownStrokeColor"

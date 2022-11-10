@@ -31,13 +31,22 @@ final class NewsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadDummyNews()
+        configTableView()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
+
+    // MARK: - Private methods
+
+    private func configTableView() {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = UITableView.automaticDimension
         tableView.register(NewsViewCell.nib(), forCellReuseIdentifier: NewsViewCell.identifier)
         tableView.reloadData()
     }
-
-    // MARK: - Private methods
 
     private func loadDummyNews() {
         loadDummyFriends()
@@ -57,118 +66,7 @@ final class NewsViewController: UITableViewController {
     }
 
     private func loadDummyFriends() {
-        myFriends = [
-            Friend(
-                friendNickName: "Friend",
-                friendImageName: Constants.friendImageNameText,
-                friendGroupName: "",
-                photos: [
-                    Photo(photoName: "photo1", likesCount: 10),
-                    Photo(photoName: "photo2", likesCount: 1),
-                    Photo(photoName: "photo3", likesCount: 12)
-                ]
-            ), Friend(
-                friendNickName: "Friend2",
-                friendImageName: Constants.friendImageNameText,
-                friendGroupName: "",
-                photos: [
-                    Photo(photoName: "photo4", likesCount: 10),
-                    Photo(photoName: "photo5", likesCount: 14),
-                    Photo(photoName: "photo6", likesCount: 13)
-                ]
-            ), Friend(
-                friendNickName: "Friend3",
-                friendImageName: Constants.friendImageNameText,
-                friendGroupName: "Команда ВКонтакте",
-                photos: [
-                    Photo(photoName: "photo7", likesCount: 11),
-                    Photo(photoName: "photo1", likesCount: 16),
-                    Photo(photoName: "photo2", likesCount: 18)
-                ]
-            ), Friend(
-                friendNickName: "Ariend4",
-                friendImageName: Constants.friendImageNameText,
-                friendGroupName: "",
-                photos: [
-                    Photo(photoName: "photo3", likesCount: 15),
-                    Photo(photoName: "photo4", likesCount: 15),
-                    Photo(photoName: "photo5", likesCount: 19)
-                ]
-            ), Friend(
-                friendNickName: "Friend5",
-                friendImageName: Constants.friendImageNameText,
-                friendGroupName: "Команда ВКонтакте",
-                photos: [
-                    Photo(photoName: "photo6", likesCount: 10),
-                    Photo(photoName: "photo7", likesCount: 10),
-                    Photo(photoName: "photo1", likesCount: 10)
-                ]
-            ), Friend(
-                friendNickName: "Ariend6",
-                friendImageName: Constants.friendImageNameText,
-                friendGroupName: "",
-                photos: [
-                    Photo(photoName: "photo2", likesCount: 10),
-                    Photo(photoName: "photo3", likesCount: 10),
-                    Photo(photoName: "photo4", likesCount: 10)
-                ]
-            ),
-            Friend(
-                friendNickName: "UFriend",
-                friendImageName: Constants.friendImageNameText,
-                friendGroupName: "",
-                photos: [
-                    Photo(photoName: "photo1", likesCount: 10),
-                    Photo(photoName: "photo2", likesCount: 1),
-                    Photo(photoName: "photo3", likesCount: 12)
-                ]
-            ), Friend(
-                friendNickName: "ZFriend2",
-                friendImageName: Constants.friendImageNameText,
-                friendGroupName: "",
-                photos: [
-                    Photo(photoName: "photo4", likesCount: 10),
-                    Photo(photoName: "photo5", likesCount: 14),
-                    Photo(photoName: "photo6", likesCount: 13)
-                ]
-            ), Friend(
-                friendNickName: "ZFriend3",
-                friendImageName: Constants.friendImageNameText,
-                friendGroupName: "Команда ВКонтакте",
-                photos: [
-                    Photo(photoName: "photo7", likesCount: 11),
-                    Photo(photoName: "photo1", likesCount: 16),
-                    Photo(photoName: "photo2", likesCount: 18)
-                ]
-            ), Friend(
-                friendNickName: "UAriend4",
-                friendImageName: Constants.friendImageNameText,
-                friendGroupName: "",
-                photos: [
-                    Photo(photoName: "photo3", likesCount: 15),
-                    Photo(photoName: "photo4", likesCount: 15),
-                    Photo(photoName: "photo5", likesCount: 19)
-                ]
-            ), Friend(
-                friendNickName: "DFriend5",
-                friendImageName: Constants.friendImageNameText,
-                friendGroupName: "Команда ВКонтакте",
-                photos: [
-                    Photo(photoName: "photo6", likesCount: 10),
-                    Photo(photoName: "photo7", likesCount: 10),
-                    Photo(photoName: "photo1", likesCount: 10)
-                ]
-            ), Friend(
-                friendNickName: "DoAriend6",
-                friendImageName: Constants.friendImageNameText,
-                friendGroupName: "",
-                photos: [
-                    Photo(photoName: "photo2", likesCount: 10),
-                    Photo(photoName: "photo3", likesCount: 10),
-                    Photo(photoName: "photo4", likesCount: 10)
-                ]
-            )
-        ]
+        myFriends = Friend.makeDummyData()
     }
 }
 
@@ -196,11 +94,6 @@ extension NewsViewController {
         UITableView.automaticDimension
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        tableView.reloadData()
-    }
-
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "goToPhotoGallerySegue", sender: self)
     }
@@ -209,18 +102,25 @@ extension NewsViewController {
 /// константы
 extension NewsViewController {
     enum Constants {
-        static let newsTextOne = "asdasd ad asd ada dad asd asd asd asd adas" +
-            "dasd asd asd asd asd asda sda sda sdas dasd asd asd asd "
+        static let newsTextOne = """
+                    asdasd ad asd ada dad asd asd asd asd adas \
+                    dasd asd asd asd asd asda sda sda sdas dasd asd asd asd
+        """
         static let newsTextTwo = "text two text two text two"
-        static let newsTextThree = "text three text three text three text three" +
-            "dasd asd asd asd asd asda text three text three" +
-            "dasd asd asd asd asd asda text three text three"
-        static let newsTextFour = "newsTextFour newsTextFour newsTextFour" +
-            "newsTextFour newsTextFour newsTextFour newsTextFournewsTextFour" +
-            "newsTextFour newsTextFour newsTextFour newsTextFournewsTextFour"
-        static let newsTextFive = "newsTextFive asd asd adas" +
-            "dasd newsTextFive newsTextFive newsTextFive newsTextFive newsTextFive "
-        static let friendImageNameText = "friend2"
+        static let newsTextThree = """
+        text three text three text three text three \
+                    "dasd asd asd asd asd asda text three text three \
+                    "dasd asd asd asd asd asda text three text three
+        """
+        static let newsTextFour = """
+                newsTextFour newsTextFour newsTextFour \
+                    newsTextFour newsTextFour newsTextFour newsTextFournewsTextFour \
+                    newsTextFour newsTextFour newsTextFour newsTextFournewsTextFour
+        """
+        static let newsTextFive = """
+        newsTextFive asd asd adas \
+                    dasd newsTextFive newsTextFive newsTextFive newsTextFive newsTextFive
+        """
         static let photoOne = "image1"
         static let photoTwo = "image2"
         static let photoThree = "image3"

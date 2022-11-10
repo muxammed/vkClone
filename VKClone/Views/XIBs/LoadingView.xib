@@ -11,10 +11,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoadingView" customModule="VKClone" customModuleProvider="target">
             <connections>
-                <outlet property="firstDot" destination="bz6-VF-0wx" id="rz4-rb-wM7"/>
+                <outlet property="firstDotView" destination="bz6-VF-0wx" id="rz4-rb-wM7"/>
                 <outlet property="loadingView" destination="iN0-l3-epB" id="6jY-7e-3HU"/>
-                <outlet property="secondDot" destination="CD3-mW-pq5" id="vkd-0g-x3c"/>
-                <outlet property="thirdDot" destination="7K4-2X-zdz" id="XUt-VF-3if"/>
+                <outlet property="secondDotView" destination="CD3-mW-pq5" id="vkd-0g-x3c"/>
+                <outlet property="thirdDotView" destination="7K4-2X-zdz" id="XUt-VF-3if"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

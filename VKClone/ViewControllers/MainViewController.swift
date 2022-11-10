@@ -185,6 +185,29 @@ final class MainViewController: UITableViewController {
         sortedMyFriendsMap.removeAll()
         tableView.reloadData()
     }
+
+    private func createHeaderView(section: Int) -> UIView {
+        let headerView = UIView()
+        headerView.backgroundColor = .black.withAlphaComponent(0.5)
+        let letterLabel = UILabel()
+        letterLabel.text = sortedMyFriendsMap[section].letter
+        letterLabel.font = UIFont.systemFont(ofSize: 17, weight: .bold)
+        letterLabel.textColor = .white
+        letterLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        headerView.addSubview(letterLabel)
+        letterLabelConstarints(letterLabel: letterLabel, headerView: headerView)
+        return headerView
+    }
+
+    private func letterLabelConstarints(letterLabel: UILabel, headerView: UIView) {
+        NSLayoutConstraint.activate([
+            letterLabel.topAnchor.constraint(equalTo: headerView.topAnchor),
+            letterLabel.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 12),
+            letterLabel.bottomAnchor.constraint(equalTo: headerView.bottomAnchor),
+            letterLabel.trailingAnchor.constraint(equalTo: headerView.trailingAnchor),
+        ])
+    }
 }
 
 /// Constants
@@ -210,21 +233,7 @@ extension MainViewController {
     }
 
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView()
-        headerView.backgroundColor = .black.withAlphaComponent(0.5)
-        let letterLabel = UILabel()
-        letterLabel.text = sortedMyFriendsMap[section].letter
-        letterLabel.font = UIFont.systemFont(ofSize: 17, weight: .bold)
-        letterLabel.textColor = .white
-        letterLabel.translatesAutoresizingMaskIntoConstraints = false
-
-        headerView.addSubview(letterLabel)
-        NSLayoutConstraint.activate([
-            letterLabel.topAnchor.constraint(equalTo: headerView.topAnchor),
-            letterLabel.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 12),
-            letterLabel.bottomAnchor.constraint(equalTo: headerView.bottomAnchor),
-            letterLabel.trailingAnchor.constraint(equalTo: headerView.trailingAnchor),
-        ])
+        let headerView = createHeaderView(section: section)
         return headerView
     }
 

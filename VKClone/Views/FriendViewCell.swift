@@ -4,8 +4,7 @@
 import UIKit
 
 /// ячейка друга
-@IBDesignable
-final class FriendViewCell: UITableViewCell {
+@IBDesignable final class FriendViewCell: UITableViewCell {
     // MARK: - IBOutlets
 
     @IBOutlet private var friendImageView: UIImageView!
@@ -25,6 +24,20 @@ final class FriendViewCell: UITableViewCell {
 
     // MARK: - Public methods
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        guard let currentFriend = currentFriend,
+              let hasButtons = hasButtons else { return }
+        configure(with: currentFriend, hasButtons: hasButtons)
+    }
+
+    override func layoutIfNeeded() {
+        super.layoutIfNeeded()
+        guard let currentFriend = currentFriend,
+              let hasButtons = hasButtons else { return }
+        configure(with: currentFriend, hasButtons: hasButtons)
+    }
+
     func configure(with friend: Friend, hasButtons: Bool = true) {
         currentFriend = friend
         self.hasButtons = hasButtons
@@ -40,20 +53,6 @@ final class FriendViewCell: UITableViewCell {
 
         callButton.isHidden = !hasButtons
         messageButton.isHidden = !hasButtons
-    }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        guard let currentFriend = currentFriend,
-              let hasButtons = hasButtons else { return }
-        configure(with: currentFriend, hasButtons: hasButtons)
-    }
-
-    override func layoutIfNeeded() {
-        super.layoutIfNeeded()
-        guard let currentFriend = currentFriend,
-              let hasButtons = hasButtons else { return }
-        configure(with: currentFriend, hasButtons: hasButtons)
     }
 }
 

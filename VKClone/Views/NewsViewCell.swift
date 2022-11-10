@@ -24,9 +24,10 @@ final class NewsViewCell: UITableViewCell {
 
     // MARK: - Private properties
 
-    private var likesCount: String = ""
-    private var commentsCount: String = ""
+    private var likesCount = ""
+    private var commentsCount = ""
     private var animator = UIViewPropertyAnimator()
+//    private var currentNew: Friend
 
     // MARK: - Public methods
 
@@ -34,8 +35,18 @@ final class NewsViewCell: UITableViewCell {
         UINib(nibName: Constants.NewsViewCellIdentifier, bundle: nil)
     }
 
+    override func invalidateIntrinsicContentSize() {
+        super.invalidateIntrinsicContentSize()
+        var plusWidth = likesCount.count == 0 ? -8 : CGFloat(likesCount.count * 10)
+        likeReactionViewWidthConstraint.constant = 60 + plusWidth
+        plusWidth = commentsCount.count == 0 ? -8 : CGFloat(commentsCount.count * 10)
+        commentsReactionViewWidthConstraint.constant = 60 + plusWidth
+        layoutIfNeeded()
+    }
+
     func configure(with currentNew: News) {
         newsTextLabel.text = currentNew.newsText
+
         likeReactionView.caption = currentNew.likesCount > 0 ? "\(currentNew.likesCount)" : ""
         likeReactionView.hasLabelText = currentNew.likesCount > 0 ? true : false
         likesCount = currentNew.likesCount > 0 ? "\(currentNew.likesCount)" : ""
@@ -49,129 +60,128 @@ final class NewsViewCell: UITableViewCell {
         newsDateLabel.text = Date().formatted()
 
         if currentNew.newsPhotos.count > 4 {
-            let imageOne = UIImageView()
-            imageOne.contentMode = .scaleAspectFill
-            imageOne.clipsToBounds = true
-            imageOne.image = UIImage(named: currentNew.newsPhotos[0])
-            imageOne.translatesAutoresizingMaskIntoConstraints = false
-            newsImageView.addSubview(imageOne)
-
-            let imageDwa = UIImageView()
-            imageDwa.contentMode = .scaleAspectFill
-            imageDwa.clipsToBounds = true
-            imageDwa.image = UIImage(named: currentNew.newsPhotos[1])
-            imageDwa.translatesAutoresizingMaskIntoConstraints = false
-            newsImageView.addSubview(imageDwa)
-
-            let imageThree = UIImageView()
-            imageThree.contentMode = .scaleAspectFill
-            imageThree.clipsToBounds = true
-            imageThree.image = UIImage(named: currentNew.newsPhotos[2])
-            imageThree.translatesAutoresizingMaskIntoConstraints = false
-            newsImageView.addSubview(imageThree)
-
-            let imageFour = UIImageView()
-            imageFour.contentMode = .scaleAspectFill
-            imageFour.clipsToBounds = true
-            imageFour.image = UIImage(named: currentNew.newsPhotos[3])
-            imageFour.translatesAutoresizingMaskIntoConstraints = false
-            newsImageView.addSubview(imageFour)
-
-            let blurEffect = UIBlurEffect(style: .dark)
-            let blurView = UIVisualEffectView()
-            animator = UIViewPropertyAnimator(duration: 1, curve: .linear) {
-                blurView.effect = blurEffect
-            }
-            animator.pausesOnCompletion = true
-            animator.startAnimation()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                if self.animator.state != .inactive {
-                    self.animator.stopAnimation(true)
-                    self.animator.fractionComplete = 0.5
-                }
-            }
-
-            let countLabel = UILabel()
-            countLabel.translatesAutoresizingMaskIntoConstraints = false
-            countLabel.text = "\(currentNew.newsPhotos.count - 3)+"
-            countLabel.textColor = .white.withAlphaComponent(0.9)
-            countLabel.alpha = 0
-            countLabel.textAlignment = .center
-            countLabel.font = UIFont.systemFont(ofSize: 40, weight: .bold)
-
-            blurView.translatesAutoresizingMaskIntoConstraints = false
-            imageFour.addSubview(blurView)
-            imageFour.addSubview(countLabel)
-
-            UIView.animate(withDuration: 0.4) {
-                countLabel.alpha = 1
-            }
-
-            NSLayoutConstraint.activate([
-                blurView.topAnchor.constraint(equalTo: imageFour.topAnchor),
-                blurView.leadingAnchor.constraint(equalTo: imageFour.leadingAnchor),
-                blurView.bottomAnchor.constraint(equalTo: imageFour.bottomAnchor),
-                blurView.trailingAnchor.constraint(equalTo: imageFour.trailingAnchor),
-            ])
-
-            NSLayoutConstraint.activate([
-                countLabel.leadingAnchor.constraint(equalTo: imageFour.leadingAnchor),
-                countLabel.trailingAnchor.constraint(equalTo: imageFour.trailingAnchor),
-                countLabel.centerYAnchor.constraint(equalTo: imageFour.centerYAnchor),
-            ])
-
-            NSLayoutConstraint.activate([
-                imageOne.topAnchor.constraint(equalTo: newsImageView.topAnchor),
-                imageOne.leadingAnchor.constraint(equalTo: newsImageView.leadingAnchor),
-                imageOne.widthAnchor.constraint(equalTo: newsImageView.widthAnchor, multiplier: 1 / 2),
-                imageOne.heightAnchor.constraint(equalTo: newsImageView.heightAnchor, multiplier: 1 / 2),
-            ])
-
-            NSLayoutConstraint.activate([
-                imageDwa.topAnchor.constraint(equalTo: newsImageView.topAnchor),
-                imageDwa.trailingAnchor.constraint(equalTo: newsImageView.trailingAnchor),
-                imageDwa.widthAnchor.constraint(equalTo: newsImageView.widthAnchor, multiplier: 1 / 2),
-                imageDwa.heightAnchor.constraint(equalTo: newsImageView.heightAnchor, multiplier: 1 / 2),
-            ])
-
-            NSLayoutConstraint.activate([
-                imageThree.bottomAnchor.constraint(equalTo: newsImageView.bottomAnchor),
-                imageThree.leadingAnchor.constraint(equalTo: newsImageView.leadingAnchor),
-                imageThree.widthAnchor.constraint(equalTo: newsImageView.widthAnchor, multiplier: 1 / 2),
-                imageThree.heightAnchor.constraint(equalTo: newsImageView.heightAnchor, multiplier: 1 / 2),
-            ])
-
-            NSLayoutConstraint.activate([
-                imageFour.bottomAnchor.constraint(equalTo: newsImageView.bottomAnchor),
-                imageFour.trailingAnchor.constraint(equalTo: newsImageView.trailingAnchor),
-                imageFour.widthAnchor.constraint(equalTo: newsImageView.widthAnchor, multiplier: 1 / 2),
-                imageFour.heightAnchor.constraint(equalTo: newsImageView.heightAnchor, multiplier: 1 / 2),
-            ])
-
+            placeFourImages(by: currentNew)
         } else {
             let image = UIImageView()
             image.contentMode = .scaleAspectFill
             image.image = UIImage(named: currentNew.newsPhotos[0])
             image.translatesAutoresizingMaskIntoConstraints = false
             newsImageView.addSubview(image)
-            NSLayoutConstraint.activate([
-                image.topAnchor.constraint(equalTo: newsImageView.topAnchor),
-                image.leadingAnchor.constraint(equalTo: newsImageView.leadingAnchor),
-                image.bottomAnchor.constraint(equalTo: newsImageView.bottomAnchor),
-                image.trailingAnchor.constraint(equalTo: newsImageView.trailingAnchor),
-            ])
+            pinToParentView(with: image, to: newsImageView)
         }
 
         invalidateIntrinsicContentSize()
     }
 
-    override func invalidateIntrinsicContentSize() {
-        super.invalidateIntrinsicContentSize()
-        var plusWidth = likesCount.count == 0 ? -8 : CGFloat(likesCount.count * 10)
-        likeReactionViewWidthConstraint.constant = 60 + plusWidth
-        plusWidth = commentsCount.count == 0 ? -8 : CGFloat(commentsCount.count * 10)
-        commentsReactionViewWidthConstraint.constant = 60 + plusWidth
-        layoutIfNeeded()
+    // MARK: - Private methods
+
+    private func placeFourImages(by currentNew: News) {
+        let imageOne = createImageView(with: currentNew.newsPhotos[0])
+        let imageDwa = createImageView(with: currentNew.newsPhotos[1])
+        let imageThree = createImageView(with: currentNew.newsPhotos[2])
+        let imageFour = createImageView(with: currentNew.newsPhotos[3])
+
+        let blurView = createBlurView()
+        let countLabel = createCountLable(with: currentNew.newsPhotos.count)
+
+        imageFour.addSubview(blurView)
+        imageFour.addSubview(countLabel)
+
+        UIView.animate(withDuration: 0.4) {
+            countLabel.alpha = 1
+        }
+
+        pinToParentView(with: blurView, to: imageFour)
+        pinToParentView(with: countLabel, to: imageFour)
+
+        imageOneConstraints(with: imageOne)
+        imageDwaConstraints(with: imageDwa)
+        imageThreeConstraints(with: imageThree)
+        imageFourConstraints(with: imageFour)
+    }
+
+    private func imageOneConstraints(with imageOne: UIImageView) {
+        NSLayoutConstraint.activate([
+            imageOne.topAnchor.constraint(equalTo: newsImageView.topAnchor),
+            imageOne.leadingAnchor.constraint(equalTo: newsImageView.leadingAnchor),
+            imageOne.widthAnchor.constraint(equalTo: newsImageView.widthAnchor, multiplier: 1 / 2),
+            imageOne.heightAnchor.constraint(equalTo: newsImageView.heightAnchor, multiplier: 1 / 2),
+        ])
+    }
+
+    private func imageDwaConstraints(with imageDwa: UIImageView) {
+        NSLayoutConstraint.activate([
+            imageDwa.topAnchor.constraint(equalTo: newsImageView.topAnchor),
+            imageDwa.trailingAnchor.constraint(equalTo: newsImageView.trailingAnchor),
+            imageDwa.widthAnchor.constraint(equalTo: newsImageView.widthAnchor, multiplier: 1 / 2),
+            imageDwa.heightAnchor.constraint(equalTo: newsImageView.heightAnchor, multiplier: 1 / 2),
+        ])
+    }
+
+    private func imageThreeConstraints(with imageThree: UIImageView) {
+        NSLayoutConstraint.activate([
+            imageThree.bottomAnchor.constraint(equalTo: newsImageView.bottomAnchor),
+            imageThree.leadingAnchor.constraint(equalTo: newsImageView.leadingAnchor),
+            imageThree.widthAnchor.constraint(equalTo: newsImageView.widthAnchor, multiplier: 1 / 2),
+            imageThree.heightAnchor.constraint(equalTo: newsImageView.heightAnchor, multiplier: 1 / 2),
+        ])
+    }
+
+    private func imageFourConstraints(with imageFour: UIImageView) {
+        NSLayoutConstraint.activate([
+            imageFour.bottomAnchor.constraint(equalTo: newsImageView.bottomAnchor),
+            imageFour.trailingAnchor.constraint(equalTo: newsImageView.trailingAnchor),
+            imageFour.widthAnchor.constraint(equalTo: newsImageView.widthAnchor, multiplier: 1 / 2),
+            imageFour.heightAnchor.constraint(equalTo: newsImageView.heightAnchor, multiplier: 1 / 2),
+        ])
+    }
+
+    private func pinToParentView(with view: UIView, to imageView: UIView) {
+        NSLayoutConstraint.activate([
+            view.topAnchor.constraint(equalTo: imageView.topAnchor),
+            view.leadingAnchor.constraint(equalTo: imageView.leadingAnchor),
+            view.bottomAnchor.constraint(equalTo: imageView.bottomAnchor),
+            view.trailingAnchor.constraint(equalTo: imageView.trailingAnchor),
+        ])
+    }
+
+    private func createImageView(with imageName: String) -> UIImageView {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.image = UIImage(named: imageName)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        newsImageView.addSubview(imageView)
+        return imageView
+    }
+
+    private func createBlurView() -> UIVisualEffectView {
+        let blurEffect = UIBlurEffect(style: .dark)
+        let blurView = UIVisualEffectView()
+        blurView.translatesAutoresizingMaskIntoConstraints = false
+        animator = UIViewPropertyAnimator(duration: 1, curve: .linear) {
+            blurView.effect = blurEffect
+        }
+        animator.pausesOnCompletion = true
+        animator.startAnimation()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+            if self.animator.state != .inactive {
+                self.animator.stopAnimation(true)
+                self.animator.fractionComplete = 0.5
+            }
+        }
+        return blurView
+    }
+
+    private func createCountLable(with count: Int) -> UILabel {
+        let countLabel = UILabel()
+        countLabel.translatesAutoresizingMaskIntoConstraints = false
+        countLabel.text = "\(count - 3)+"
+        countLabel.textColor = .white.withAlphaComponent(0.9)
+        countLabel.alpha = 0
+        countLabel.textAlignment = .center
+        countLabel.font = UIFont.systemFont(ofSize: 40, weight: .bold)
+        return countLabel
     }
 }
 

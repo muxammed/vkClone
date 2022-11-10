@@ -4,8 +4,7 @@
 import UIKit
 
 /// кастомная вьюв для переиспользования реакций лайки комменты шейр
-@IBDesignable
-final class ReactionView: UIView {
+@IBDesignable final class ReactionView: UIView {
     // MARK: - IBOutlets
 
     @IBOutlet private var reactionView: UIView!
@@ -14,7 +13,7 @@ final class ReactionView: UIView {
     @IBOutlet private var labelLeadigConstraint: NSLayoutConstraint!
     @IBOutlet private var labelViewWidthConstraint: NSLayoutConstraint!
 
-    // MARK: - IBInspectables
+    // MARK: - Public properties
 
     @IBInspectable var caption: String? {
         get { reactionLabel?.text }
@@ -64,13 +63,13 @@ final class ReactionView: UIView {
 
     // MARK: - Public methods
 
-    func updateView() {
-        labelViewWidthConstraint?.constant = CGFloat(reactionLabel.text?.count ?? 0 * 10)
-    }
-
     override func layoutSubviews() {
         super.layoutSubviews()
         configureView()
+    }
+
+    func updateView() {
+        labelViewWidthConstraint?.constant = CGFloat(reactionLabel.text?.count ?? 0 * 10)
     }
 
     // MARK: - Private methods
@@ -81,7 +80,7 @@ final class ReactionView: UIView {
     }
 
     private func setupGestures() {
-        let recognizer = UILongPressGestureRecognizer(target: self, action: #selector(touched(sender:)))
+        let recognizer = UILongPressGestureRecognizer(target: self, action: #selector(touchedAction(sender:)))
         recognizer.delegate = self
         recognizer.minimumPressDuration = 0.0
         addGestureRecognizer(recognizer)
@@ -93,47 +92,46 @@ final class ReactionView: UIView {
         bundle.loadNibNamed(Constants.reactionViewNibName, owner: self, options: nil)
         addSubview(reactionView)
         reactionView.translatesAutoresizingMaskIntoConstraints = false
+        reactionViewConstraints()
+        frame = bounds
+        clipsToBounds = true
+        reactionView.clipsToBounds = true
+    }
+
+    private func reactionViewConstraints() {
         NSLayoutConstraint.activate([
             reactionView.topAnchor.constraint(equalTo: topAnchor),
             reactionView.leadingAnchor.constraint(equalTo: leadingAnchor),
             reactionView.bottomAnchor.constraint(equalTo: bottomAnchor),
             reactionView.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
-        frame = bounds
-        clipsToBounds = true
-        reactionView.clipsToBounds = true
     }
 
-    @objc func touched(sender: UILongPressGestureRecognizer) {
+    private func makeAnimation(with scaledAndTranslatedTransform: CGAffineTransform, isFilledImage: Bool) {
+        UIView.animate(
+            withDuration: 0.5,
+            delay: 0,
+            usingSpringWithDamping: 0.4,
+            initialSpringVelocity: 0,
+            options: .curveLinear
+        ) {
+            self.transform = scaledAndTranslatedTransform
+            self.reactionImageView.image = isFilledImage ? self.filedImage : self.emptyImage
+        }
+    }
+
+    @objc func touchedAction(sender: UILongPressGestureRecognizer) {
         var originalTransform = transform
         if sender.state == .began {
             let originalTransform2 = transform
             let scaledTransform = originalTransform2.scaledBy(x: 1.2, y: 1.2)
             originalTransform = scaledTransform
             let scaledAndTranslatedTransform = scaledTransform.translatedBy(x: 0.0, y: 0.0)
-            UIView.animate(
-                withDuration: 0.5,
-                delay: 0,
-                usingSpringWithDamping: 0.4,
-                initialSpringVelocity: 0,
-                options: .curveLinear
-            ) {
-                self.transform = scaledAndTranslatedTransform
-                self.reactionImageView.image = self.filedImage
-            }
+            makeAnimation(with: scaledAndTranslatedTransform, isFilledImage: true)
         } else if sender.state == .ended {
             let scaledTransform = originalTransform.scaledBy(x: 1 / 1.2, y: 1 / 1.2)
             let scaledAndTranslatedTransform = scaledTransform.translatedBy(x: 0.0, y: 0.0)
-            UIView.animate(
-                withDuration: 0.5,
-                delay: 0,
-                usingSpringWithDamping: 0.4,
-                initialSpringVelocity: 0,
-                options: .curveLinear
-            ) {
-                self.transform = scaledAndTranslatedTransform
-                self.reactionImageView.image = self.emptyImage
-            }
+            makeAnimation(with: scaledAndTranslatedTransform, isFilledImage: false)
         }
     }
 }

@@ -36,11 +36,7 @@ final class GroupViewCell: UITableViewCell {
         // joinButton.addTarget(self, action: #selector(joinButtonAction), for: .touchUpInside)
         currentGroup = group
         currentIndexPath = indexPath
-
-        // joinButton.addTarget(self, action: #selector(joinButtonPressed), for: .touchDown)
-        joinButton.addTarget(self, action: #selector(joinButtonLeaved), for: .touchCancel)
-
-        // groupImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(<#T##@objc method#>)))
+        joinButton.addTarget(self, action: #selector(joinButtonLeavedAction), for: .touchCancel)
     }
 
     // MARK: - Private methods
@@ -52,7 +48,7 @@ final class GroupViewCell: UITableViewCell {
         delegate.joinGroup(group: currentGroup, indexPath: indexPath)
     }
 
-    @objc private func joinButtonPressed() {
+    @objc private func joinButtonPressedAction() {
         imageViewWidthConstraint.constant -= 20
         imageViewHeightConstraint.constant -= 20
         UIView.animate(withDuration: 0.5) {
@@ -60,7 +56,7 @@ final class GroupViewCell: UITableViewCell {
         }
     }
 
-    @objc private func joinButtonLeaved() {
+    @objc private func joinButtonLeavedAction() {
         imageViewWidthConstraint.constant += 20
         imageViewHeightConstraint.constant += 20
         UIView.animate(withDuration: 0.5) {
