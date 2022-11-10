@@ -4,20 +4,43 @@
 import UIKit
 
 /// ячейка друга
-final class FriendViewCell: UITableViewCell {
+@IBDesignable final class FriendViewCell: UITableViewCell {
     // MARK: - IBOutlets
 
     @IBOutlet private var friendImageView: UIImageView!
     @IBOutlet private var friendNickLabel: UILabel!
     @IBOutlet private var friendGroupLabel: UILabel!
+    @IBOutlet private var callButton: UIButton!
+    @IBOutlet private var messageButton: UIButton!
 
     // MARK: - Public properties
 
     static let identifier = Constants.FriendsViewCellIdentifier
 
+    // MARK: - Private properties
+
+    private var currentFriend: Friend?
+    private var hasButtons: Bool?
+
     // MARK: - Public methods
 
-    func configure(with friend: Friend) {
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        guard let currentFriend = currentFriend,
+              let hasButtons = hasButtons else { return }
+        configure(with: currentFriend, hasButtons: hasButtons)
+    }
+
+    override func layoutIfNeeded() {
+        super.layoutIfNeeded()
+        guard let currentFriend = currentFriend,
+              let hasButtons = hasButtons else { return }
+        configure(with: currentFriend, hasButtons: hasButtons)
+    }
+
+    func configure(with friend: Friend, hasButtons: Bool = true) {
+        currentFriend = friend
+        self.hasButtons = hasButtons
         guard let friendNickLabel = friendNickLabel,
               let friendImageView = friendImageView else { return }
         friendNickLabel.text = friend.friendNickName
@@ -27,6 +50,9 @@ final class FriendViewCell: UITableViewCell {
         } else {
             friendGroupLabel.text = friend.friendGroupName
         }
+
+        callButton.isHidden = !hasButtons
+        messageButton.isHidden = !hasButtons
     }
 }
 

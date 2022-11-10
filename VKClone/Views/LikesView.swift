@@ -90,6 +90,7 @@ final class LikesView: UIView {
     }
 }
 
+/// константы
 extension LikesView {
     enum Constants {
         static let emptyLikeImageName = "heart"

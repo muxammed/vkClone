@@ -10,6 +10,8 @@ final class GroupViewCell: UITableViewCell {
     @IBOutlet private var groupImageView: UIImageView!
     @IBOutlet private var groupNameLabel: UILabel!
     @IBOutlet private var joinButton: UIButton!
+    @IBOutlet private var imageViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private var imageViewWidthConstraint: NSLayoutConstraint!
 
     // MARK: - Public properties
 
@@ -31,9 +33,10 @@ final class GroupViewCell: UITableViewCell {
         groupNameLabel.text = group.groupName
         groupImageView.image = UIImage(named: group.groupImageName)
         joinButton.isHidden = isJoined
-        joinButton.addTarget(self, action: #selector(joinButtonAction), for: .touchUpInside)
+        // joinButton.addTarget(self, action: #selector(joinButtonAction), for: .touchUpInside)
         currentGroup = group
         currentIndexPath = indexPath
+        joinButton.addTarget(self, action: #selector(joinButtonLeavedAction), for: .touchCancel)
     }
 
     // MARK: - Private methods
@@ -43,6 +46,22 @@ final class GroupViewCell: UITableViewCell {
               let currentGroup = currentGroup,
               let indexPath = currentIndexPath else { return }
         delegate.joinGroup(group: currentGroup, indexPath: indexPath)
+    }
+
+    @objc private func joinButtonPressedAction() {
+        imageViewWidthConstraint.constant -= 20
+        imageViewHeightConstraint.constant -= 20
+        UIView.animate(withDuration: 0.5) {
+            self.layoutIfNeeded()
+        }
+    }
+
+    @objc private func joinButtonLeavedAction() {
+        imageViewWidthConstraint.constant += 20
+        imageViewHeightConstraint.constant += 20
+        UIView.animate(withDuration: 0.5) {
+            self.layoutIfNeeded()
+        }
     }
 }
 

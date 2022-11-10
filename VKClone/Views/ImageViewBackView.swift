@@ -3,6 +3,7 @@
 
 import UIKit
 
+/// вьюха с визуальными настройками тени
 final class ImageViewBackView: UIView {
     // MARK: - Inspectables
 

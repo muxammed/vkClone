@@ -1,7 +1,7 @@
 // User.swift
 // Copyright © RoadMap. All rights reserved.
 
-/// модель пользователя
+/// пользователя
 struct User {
     let username: String
     var joinedGroups: [Group]
