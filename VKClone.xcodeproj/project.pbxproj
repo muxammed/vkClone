@@ -15,6 +15,11 @@
 		130007312919EF8C00659E31 /* ReactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130007302919EF8C00659E31 /* ReactionView.swift */; };
 		130007332919F42A00659E31 /* NewsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130007322919F42A00659E31 /* NewsViewCell.swift */; };
 		131CD430291AC59D000578B0 /* ReactionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 131CD42F291AC59D000578B0 /* ReactionView.xib */; };
+		13249020291D4A33004AA23D /* PhotoGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1324901F291D4A33004AA23D /* PhotoGalleryViewController.swift */; };
+		13249022291E445F004AA23D /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13249021291E445F004AA23D /* CustomNavigationController.swift */; };
+		13249024291E4519004AA23D /* CustomPushAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13249023291E4519004AA23D /* CustomPushAnimator.swift */; };
+		13249026291E4BB5004AA23D /* CustomPopAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13249025291E4BB5004AA23D /* CustomPopAnimator.swift */; };
+		13249028291E501E004AA23D /* CustomInteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13249027291E501E004AA23D /* CustomInteractiveTransition.swift */; };
 		13991A97291BED6A00A21DEB /* LoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13991A96291BED6A00A21DEB /* LoadingView.xib */; };
 		13991A9B291BFBFF00A21DEB /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13991A9A291BFBFF00A21DEB /* LoadingView.swift */; };
 		13AA03DF29129960000BF17C /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13AA03DE29129960000BF17C /* UIViewController+Extension.swift */; };
@@ -51,6 +56,11 @@
 		130007302919EF8C00659E31 /* ReactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionView.swift; sourceTree = "<group>"; };
 		130007322919F42A00659E31 /* NewsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewCell.swift; sourceTree = "<group>"; };
 		131CD42F291AC59D000578B0 /* ReactionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReactionView.xib; sourceTree = "<group>"; };
+		1324901F291D4A33004AA23D /* PhotoGalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGalleryViewController.swift; sourceTree = "<group>"; };
+		13249021291E445F004AA23D /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
+		13249023291E4519004AA23D /* CustomPushAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPushAnimator.swift; sourceTree = "<group>"; };
+		13249025291E4BB5004AA23D /* CustomPopAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPopAnimator.swift; sourceTree = "<group>"; };
+		13249027291E501E004AA23D /* CustomInteractiveTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInteractiveTransition.swift; sourceTree = "<group>"; };
 		13991A96291BED6A00A21DEB /* LoadingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingView.xib; sourceTree = "<group>"; };
 		13991A9A291BFBFF00A21DEB /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		13AA03DE29129960000BF17C /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
@@ -167,6 +177,11 @@
 				13F7BAFC29185C6000A10E05 /* FriendPhotosViewController.swift */,
 				13F7BB042918A18400A10E05 /* GroupsViewController.swift */,
 				130007272919E77D00659E31 /* NewsViewController.swift */,
+				1324901F291D4A33004AA23D /* PhotoGalleryViewController.swift */,
+				13249021291E445F004AA23D /* CustomNavigationController.swift */,
+				13249023291E4519004AA23D /* CustomPushAnimator.swift */,
+				13249025291E4BB5004AA23D /* CustomPopAnimator.swift */,
+				13249027291E501E004AA23D /* CustomInteractiveTransition.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -310,6 +325,7 @@
 				13F7BB052918A18400A10E05 /* GroupsViewController.swift in Sources */,
 				13F7BB0329189A2600A10E05 /* User.swift in Sources */,
 				13AA03DF29129960000BF17C /* UIViewController+Extension.swift in Sources */,
+				13249024291E4519004AA23D /* CustomPushAnimator.swift in Sources */,
 				130007332919F42A00659E31 /* NewsViewCell.swift in Sources */,
 				130007282919E77D00659E31 /* NewsViewController.swift in Sources */,
 				130007312919EF8C00659E31 /* ReactionView.swift in Sources */,
@@ -322,9 +338,13 @@
 				13F7BB012918971200A10E05 /* Group.swift in Sources */,
 				13FDFB362912096D003DDD1F /* LoginViewController.swift in Sources */,
 				13FDFB2329120438003DDD1F /* MainViewController.swift in Sources */,
+				13249028291E501E004AA23D /* CustomInteractiveTransition.swift in Sources */,
 				13FDFB1F29120438003DDD1F /* AppDelegate.swift in Sources */,
+				13249022291E445F004AA23D /* CustomNavigationController.swift in Sources */,
+				13249020291D4A33004AA23D /* PhotoGalleryViewController.swift in Sources */,
 				13F7BAF72918488300A10E05 /* GroupViewCell.swift in Sources */,
 				13FDFB2129120438003DDD1F /* SceneDelegate.swift in Sources */,
+				13249026291E4BB5004AA23D /* CustomPopAnimator.swift in Sources */,
 				13F7BAF929184B0C00A10E05 /* MyGroupsViewController.swift in Sources */,
 				13F7BB0F2918DCA300A10E05 /* LikesView.swift in Sources */,
 				13F7BAFB2918518300A10E05 /* FriendViewCell.swift in Sources */,

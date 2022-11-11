@@ -363,7 +363,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OM0-6p-rfS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="288" y="569"/>
+            <point key="canvasLocation" x="285" y="545"/>
         </scene>
         <!--Groups View Controller-->
         <scene sceneID="jMP-PW-4WL">
@@ -400,7 +400,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TLa-UU-DIS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="yzT-vL-PBt" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1304.6153846153845" y="584.36018957345971"/>
+            <point key="canvasLocation" x="1083" y="544"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="NGQ-79-aIo">
@@ -425,7 +425,7 @@
         <!--Friends-->
         <scene sceneID="MaE-f6-BgZ">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lcK-Te-1MN" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lcK-Te-1MN" customClass="CustomNavigationController" customModule="VKClone" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Friends" image="users_outline_28" id="wuy-hV-xz2"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="MVn-eq-fYW">
@@ -454,7 +454,9 @@
                             <outlet property="delegate" destination="H0n-Fb-4ZE" id="qSp-KI-opT"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="News" id="w7r-gs-48A"/>
+                    <navigationItem key="navigationItem" title="News" id="w7r-gs-48A">
+                        <barButtonItem key="backBarButtonItem" title=" " id="L5U-09-SBN"/>
+                    </navigationItem>
                     <connections>
                         <segue destination="4JB-we-O3Y" kind="show" identifier="goToPhotoGallerySegue" id="clr-7y-kvZ"/>
                     </connections>
@@ -463,10 +465,10 @@
             </objects>
             <point key="canvasLocation" x="-795.38461538461536" y="-212.55924170616112"/>
         </scene>
-        <!--View Controller-->
+        <!--Photos-->
         <scene sceneID="ubx-Ur-07v">
             <objects>
-                <viewController id="4JB-we-O3Y" sceneMemberID="viewController">
+                <viewController id="4JB-we-O3Y" customClass="PhotoGalleryViewController" customModule="VKClone" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="V2l-oe-znx">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -481,22 +483,25 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="b6i-sn-dID"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="7Rr-da-Twp" firstAttribute="centerY" secondItem="V2l-oe-znx" secondAttribute="centerY" id="fO2-ho-EEs"/>
                             <constraint firstItem="7Rr-da-Twp" firstAttribute="centerX" secondItem="V2l-oe-znx" secondAttribute="centerX" id="gnb-Tv-7mu"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="OLm-Ix-Ya0"/>
+                    <navigationItem key="navigationItem" title="Photos" id="OLm-Ix-Ya0"/>
+                    <connections>
+                        <outlet property="photoLoadingView" destination="7Rr-da-Twp" id="GRY-KN-nyq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WAF-BX-3ij" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="447" y="-655"/>
+            <point key="canvasLocation" x="446.15384615384613" y="-655.4502369668246"/>
         </scene>
         <!--Groups-->
         <scene sceneID="JLL-aR-8mi">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="iUN-1A-y5E" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="iUN-1A-y5E" customClass="CustomNavigationController" customModule="VKClone" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Groups" image="users_outline_28" id="ivf-Rz-edZ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="oNg-cP-xK3">
@@ -515,7 +520,7 @@
         <!--News-->
         <scene sceneID="6Fe-Yh-Yyr">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bpV-0E-4m3" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bpV-0E-4m3" customClass="CustomNavigationController" customModule="VKClone" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="News" image="newspaper" catalog="system" id="qoZ-he-Dpg"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="3zX-w5-qcf">
