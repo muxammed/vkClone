@@ -3,8 +3,8 @@
 
 import UIKit
 
-/// кастом навигашн
-final class CustomNavigationController: UINavigationController, UINavigationControllerDelegate {
+/// Кастом навигашн
+final class CustomNavigationController: UINavigationController {
     // MARK: - Private properties
 
     private let interactiveTransition = CustomInteractiveTransition()
@@ -15,9 +15,10 @@ final class CustomNavigationController: UINavigationController, UINavigationCont
         super.viewDidLoad()
         delegate = self
     }
+}
 
-    // MARK: - Public methods
-
+/// UINavigationControllerDelegate
+extension CustomNavigationController: UINavigationControllerDelegate {
     func navigationController(
         _ navigationController: UINavigationController,
         animationControllerFor operation: UINavigationController.Operation,

@@ -41,13 +41,15 @@ final class NewsViewController: UITableViewController {
         tableView.reloadData()
     }
 
-    // MARK: - Private methods
+    // MARK: - Public methods
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let selectedNews = selectedNews,
               let photoGalleryViewController = segue.destination as? PhotoGalleryViewController else { return }
         photoGalleryViewController.userImagesArray = selectedNews.newsPhotos
     }
+    
+    // MARK: - Private methods
 
     private func configTableView() {
         tableView.rowHeight = UITableView.automaticDimension
@@ -104,7 +106,7 @@ extension NewsViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedNews = news[indexPath.item]
-        performSegue(withIdentifier: "goToPhotoGallerySegue", sender: self)
+        performSegue(withIdentifier: Constants.goToPhotoGallerySegueIdentifier, sender: self)
     }
 }
 
@@ -137,5 +139,6 @@ extension NewsViewController {
         static let photoFive = "image5"
         static let photoSix = "image6"
         static let photoSeven = "image7"
+        static let goToPhotoGallerySegueIdentifier = "goToPhotoGallerySegue"
     }
 }

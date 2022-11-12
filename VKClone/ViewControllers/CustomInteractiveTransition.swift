@@ -3,26 +3,26 @@
 
 import UIKit
 
-/// интерактивная транзиншн
+/// Интерактивная транзиншн
 final class CustomInteractiveTransition: UIPercentDrivenInteractiveTransition {
     // MARK: - Public properties
 
     var viewController: UIViewController? {
         didSet { let recognizer = UIScreenEdgePanGestureRecognizer(
             target: self,
-            action: #selector(handleScreenEdgeGesture)
+            action: #selector(handleScreenEdgeGestureAction)
         )
         recognizer.edges = [.left]
         viewController?.view.addGestureRecognizer(recognizer)
         }
     }
 
-    var hasStarted: Bool = false
-    var shouldFinish: Bool = false
+    private var hasStarted: Bool = false
+    private var shouldFinish: Bool = false
 
     // MARK: - Public methods
 
-    @objc func handleScreenEdgeGesture(_ recognizer: UIScreenEdgePanGestureRecognizer) {
+    @objc private func handleScreenEdgeGestureAction(_ recognizer: UIScreenEdgePanGestureRecognizer) {
         switch recognizer.state {
         case .began:
             hasStarted = true

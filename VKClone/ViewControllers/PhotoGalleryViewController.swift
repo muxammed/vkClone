@@ -9,14 +9,11 @@ final class PhotoGalleryViewController: UIViewController {
 
     @IBOutlet private var photoLoadingView: LoadingView!
 
-    // MARK: - Public properties
-
-    var userImagesArray: [String]?
-    var userImageViewsArray: [UIImageView] = []
-
     // MARK: - Private properties
 
-    private var currentImageInt = 0
+    private var currentImage = 0
+    private var userImagesArray: [String]?
+    private var userImageViewsArray: [UIImageView] = []
 
     // MARK: - Life cycle
 
@@ -38,9 +35,9 @@ final class PhotoGalleryViewController: UIViewController {
     // MARK: - Private methods
 
     @objc private func swipeAction(_ swipe: UISwipeGestureRecognizer) {
-        let currentImageView = userImageViewsArray[currentImageInt]
+        let currentImageView = userImageViewsArray[currentImage]
         let nextImageView = swipe.direction == .left ?
-            userImageViewsArray[currentImageInt + 1] : userImageViewsArray[currentImageInt - 1]
+            userImageViewsArray[currentImage + 1] : userImageViewsArray[currentImage - 1]
 
         let originalTransform = currentImageView.transform
         let newCenter = currentImageView.center
@@ -67,7 +64,7 @@ final class PhotoGalleryViewController: UIViewController {
                     currentImageView.layoutIfNeeded()
                     nextImageView.layoutIfNeeded()
                 } completion: { _ in
-                    self.currentImageInt += swipe.direction == .left ? 1 : -1
+                    self.currentImage += swipe.direction == .left ? 1 : -1
                 }
             }
         }
