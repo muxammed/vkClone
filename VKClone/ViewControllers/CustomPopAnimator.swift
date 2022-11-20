@@ -3,7 +3,7 @@
 
 import UIKit
 
-/// катом пуш
+/// катом поп
 final class CustomPopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     // MARK: - Public mehotds
 
@@ -18,7 +18,7 @@ final class CustomPopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             translationX: source.view.frame.width / 50,
             y: 0
         )
-        let rotate = CGAffineTransform(scaleX: 0.8, y: 0.8)
+        let rotate = CGAffineTransform(scaleX: Constants.scaleValue, y: Constants.scaleValue)
         destination.view.transform = translate.concatenating(rotate)
 
         UIView.animateKeyframes(
@@ -63,5 +63,12 @@ final class CustomPopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
 
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         0.6
+    }
+}
+
+/// константы
+extension CustomPopAnimator {
+    enum Constants {
+        static let scaleValue = 0.8
     }
 }

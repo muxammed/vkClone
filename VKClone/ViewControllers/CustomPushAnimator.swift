@@ -3,7 +3,7 @@
 
 import UIKit
 
-/// катом пуш
+/// Кастомный пуш
 final class CustomPushAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     // MARK: - Public mehots
 
@@ -35,7 +35,7 @@ final class CustomPushAnimator: NSObject, UIViewControllerAnimatedTransitioning 
                     relativeDuration: 0.75
                 ) {
                     let translation = CGAffineTransform(translationX: 0, y: 0)
-                    let scale = CGAffineTransform(scaleX: 0.8, y: 0.8)
+                    let scale = CGAffineTransform(scaleX: Constants.scaleValue, y: Constants.scaleValue)
                     source.view.transform = translation.concatenating(scale)
                 }
 
@@ -61,5 +61,12 @@ final class CustomPushAnimator: NSObject, UIViewControllerAnimatedTransitioning 
                 transitionContext.completeTransition(finished && !transitionContext.transitionWasCancelled)
             }
         )
+    }
+}
+
+/// константы
+extension CustomPushAnimator {
+    enum Constants {
+        static let scaleValue = 0.8
     }
 }

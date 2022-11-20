@@ -3,7 +3,7 @@
 
 import UIKit
 
-/// Кастом навигашн
+/// Кастомный UINavigationController
 final class CustomNavigationController: UINavigationController {
     // MARK: - Private properties
 
@@ -17,7 +17,7 @@ final class CustomNavigationController: UINavigationController {
     }
 }
 
-/// UINavigationControllerDelegate
+// MARK: - UINavigationControllerDelegate
 extension CustomNavigationController: UINavigationControllerDelegate {
     func navigationController(
         _ navigationController: UINavigationController,

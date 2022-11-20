@@ -41,7 +41,7 @@ final class PhotoGalleryViewController: UIViewController {
 
         let originalTransform = currentImageView.transform
         let newCenter = currentImageView.center
-        let scaledTransform = currentImageView.transform.scaledBy(x: 0.90, y: 0.90)
+        let scaledTransform = currentImageView.transform.scaledBy(x: Constants.scaleValue, y: Constants.scaleValue)
         let scaledAndTranslatedTransform = scaledTransform.translatedBy(x: 0.0, y: 0.0)
         let scaledAndTranslatedTransform2 = originalTransform.translatedBy(x: 0.0, y: 0.0)
 
@@ -100,5 +100,12 @@ final class PhotoGalleryViewController: UIViewController {
 
     private func showHideToolBar(_ isHidden: Bool) {
         tabBarController?.tabBar.isHidden = isHidden
+    }
+}
+
+/// константы
+extension PhotoGalleryViewController {
+    enum Constants {
+        static let scaleValue = 0.90
     }
 }
