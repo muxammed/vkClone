@@ -18,6 +18,7 @@ final class CustomNavigationController: UINavigationController {
 }
 
 // MARK: - UINavigationControllerDelegate
+
 extension CustomNavigationController: UINavigationControllerDelegate {
     func navigationController(
         _ navigationController: UINavigationController,
@@ -43,6 +44,6 @@ extension CustomNavigationController: UINavigationControllerDelegate {
         _ navigationController: UINavigationController,
         interactionControllerFor animationController: UIViewControllerAnimatedTransitioning
     ) -> UIViewControllerInteractiveTransitioning? {
-        interactiveTransition.hasStarted ? interactiveTransition : nil
+        interactiveTransition.isHasStarted ? interactiveTransition : nil
     }
 }

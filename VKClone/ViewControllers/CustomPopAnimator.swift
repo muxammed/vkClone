@@ -15,38 +15,38 @@ final class CustomPopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         destination.view.frame = source.view.frame
 
         let translate = CGAffineTransform(
-            translationX: source.view.frame.width / 50,
-            y: 0
+            translationX: source.view.frame.width / Constants.translationWidthDivider,
+            y: Constants.translationY
         )
         let rotate = CGAffineTransform(scaleX: Constants.scaleValue, y: Constants.scaleValue)
         destination.view.transform = translate.concatenating(rotate)
 
         UIView.animateKeyframes(
             withDuration: transitionDuration(using: transitionContext),
-            delay: 0,
+            delay: Constants.delayTimeInterval,
             options: .calculationModePaced,
             animations: {
                 UIView.addKeyframe(
-                    withRelativeStartTime: 0,
-                    relativeDuration: 0.75
+                    withRelativeStartTime: Constants.relativeStartTimeFirst,
+                    relativeDuration: Constants.relativeDurationFirst
                 ) {
-                    let translation = CGAffineTransform(translationX: 0, y: 0)
-                    let scale = CGAffineTransform(scaleX: 1, y: 1)
+                    let translation = CGAffineTransform(translationX: Constants.scaleValueFrom, y: Constants.scaleValueFrom)
+                    let scale = CGAffineTransform(scaleX: Constants.scaleValueTo, y: Constants.scaleValueTo)
                     source.view.transform = translation.concatenating(scale)
                 }
 
                 UIView.addKeyframe(
-                    withRelativeStartTime: 0.2,
-                    relativeDuration: 0.4
+                    withRelativeStartTime: Constants.relativeStartTimeSecond,
+                    relativeDuration: Constants.relativeDurationSecond
                 ) {
-                    let translation = CGAffineTransform(translationX: 200, y: source.view.frame.width * 1.5)
-                    let scale = CGAffineTransform(rotationAngle: .pi / -2)
+                    let translation = CGAffineTransform(translationX: Constants.translationX, y: source.view.frame.width * Constants.translationYMultiplier)
+                    let scale = CGAffineTransform(rotationAngle: .pi / Constants.rotationPiDivider)
                     source.view.transform = translation.concatenating(scale)
                 }
 
                 UIView.addKeyframe(
-                    withRelativeStartTime: 0.6,
-                    relativeDuration: 0.4
+                    withRelativeStartTime: Constants.relativeStartTimeThird,
+                    relativeDuration: Constants.relativeDurationThird
                 ) {
                     destination.view.transform = .identity
                 }
@@ -62,7 +62,7 @@ final class CustomPopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     }
 
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        0.6
+        Constants.transitionDuration
     }
 }
 
@@ -70,5 +70,20 @@ final class CustomPopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
 extension CustomPopAnimator {
     enum Constants {
         static let scaleValue = 0.8
+        static let transitionDuration = 0.6
+        static let translationX = 200.0
+        static let translationYMultiplier = 1.5
+        static let delayTimeInterval = 0.0
+        static let relativeStartTimeFirst = 0.0
+        static let relativeStartTimeSecond = 0.2
+        static let relativeStartTimeThird = 0.6
+        static let relativeDurationFirst = 0.75
+        static let relativeDurationSecond = 0.4
+        static let relativeDurationThird = 0.4
+        static let scaleValueFrom = 0.0
+        static let scaleValueTo = 1.0
+        static let translationWidthDivider = 50.0
+        static let translationY = 0.0
+        static let rotationPiDivider = -2.0
     }
 }

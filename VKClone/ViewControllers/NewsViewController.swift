@@ -48,7 +48,7 @@ final class NewsViewController: UITableViewController {
               let photoGalleryViewController = segue.destination as? PhotoGalleryViewController else { return }
         photoGalleryViewController.userImagesArray = selectedNews.newsPhotos
     }
-    
+
     // MARK: - Private methods
 
     private func configTableView() {
