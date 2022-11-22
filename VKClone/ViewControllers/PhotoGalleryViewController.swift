@@ -9,10 +9,13 @@ final class PhotoGalleryViewController: UIViewController {
 
     @IBOutlet private var photoLoadingView: LoadingView!
 
+    // MARK: - Public properties
+
+    var userImagesArray: [String]?
+
     // MARK: - Private properties
 
     private var currentImage = 0
-    private var userImagesArray: [String]?
     private var userImageViewsArray: [UIImageView] = []
 
     // MARK: - Life cycle

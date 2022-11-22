@@ -20,6 +20,7 @@
 		13249024291E4519004AA23D /* CustomPushAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13249023291E4519004AA23D /* CustomPushAnimator.swift */; };
 		13249026291E4BB5004AA23D /* CustomPopAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13249025291E4BB5004AA23D /* CustomPopAnimator.swift */; };
 		13249028291E501E004AA23D /* CustomInteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13249027291E501E004AA23D /* CustomInteractiveTransition.swift */; };
+		1394CDF9292D683E00C6B2C1 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1394CDF8292D683E00C6B2C1 /* Session.swift */; };
 		13991A97291BED6A00A21DEB /* LoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13991A96291BED6A00A21DEB /* LoadingView.xib */; };
 		13991A9B291BFBFF00A21DEB /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13991A9A291BFBFF00A21DEB /* LoadingView.swift */; };
 		13AA03DF29129960000BF17C /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13AA03DE29129960000BF17C /* UIViewController+Extension.swift */; };
@@ -61,6 +62,7 @@
 		13249023291E4519004AA23D /* CustomPushAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPushAnimator.swift; sourceTree = "<group>"; };
 		13249025291E4BB5004AA23D /* CustomPopAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPopAnimator.swift; sourceTree = "<group>"; };
 		13249027291E501E004AA23D /* CustomInteractiveTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInteractiveTransition.swift; sourceTree = "<group>"; };
+		1394CDF8292D683E00C6B2C1 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		13991A96291BED6A00A21DEB /* LoadingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingView.xib; sourceTree = "<group>"; };
 		13991A9A291BFBFF00A21DEB /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		13AA03DE29129960000BF17C /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
@@ -112,6 +114,14 @@
 			path = XIBs;
 			sourceTree = "<group>";
 		};
+		1394CDF7292D682500C6B2C1 /* Singltones */ = {
+			isa = PBXGroup;
+			children = (
+				1394CDF8292D683E00C6B2C1 /* Session.swift */,
+			);
+			path = Singltones;
+			sourceTree = "<group>";
+		};
 		13F7BAEE2918382000A10E05 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -152,6 +162,7 @@
 		13FDFB1D29120438003DDD1F /* VKClone */ = {
 			isa = PBXGroup;
 			children = (
+				1394CDF7292D682500C6B2C1 /* Singltones */,
 				13F7BAF32918455300A10E05 /* Models */,
 				13F7BAEE2918382000A10E05 /* Fonts */,
 				13FDFB1E29120438003DDD1F /* AppDelegate.swift */,
@@ -323,6 +334,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13F7BB052918A18400A10E05 /* GroupsViewController.swift in Sources */,
+				1394CDF9292D683E00C6B2C1 /* Session.swift in Sources */,
 				13F7BB0329189A2600A10E05 /* User.swift in Sources */,
 				13AA03DF29129960000BF17C /* UIViewController+Extension.swift in Sources */,
 				13249024291E4519004AA23D /* CustomPushAnimator.swift in Sources */,

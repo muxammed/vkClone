@@ -17,8 +17,8 @@ final class CustomInteractiveTransition: UIPercentDrivenInteractiveTransition {
         }
     }
 
-    private var isHasStarted: Bool = false
-    private var isShouldFinish: Bool = false
+    var isHasStarted: Bool = false
+    var isShouldFinish: Bool = false
 
     // MARK: - Private methods
 

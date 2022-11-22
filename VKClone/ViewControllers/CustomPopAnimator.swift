@@ -30,7 +30,10 @@ final class CustomPopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
                     withRelativeStartTime: Constants.relativeStartTimeFirst,
                     relativeDuration: Constants.relativeDurationFirst
                 ) {
-                    let translation = CGAffineTransform(translationX: Constants.scaleValueFrom, y: Constants.scaleValueFrom)
+                    let translation = CGAffineTransform(
+                        translationX: Constants.scaleValueFrom,
+                        y: Constants.scaleValueFrom
+                    )
                     let scale = CGAffineTransform(scaleX: Constants.scaleValueTo, y: Constants.scaleValueTo)
                     source.view.transform = translation.concatenating(scale)
                 }
@@ -39,7 +42,10 @@ final class CustomPopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
                     withRelativeStartTime: Constants.relativeStartTimeSecond,
                     relativeDuration: Constants.relativeDurationSecond
                 ) {
-                    let translation = CGAffineTransform(translationX: Constants.translationX, y: source.view.frame.width * Constants.translationYMultiplier)
+                    let translation = CGAffineTransform(
+                        translationX: Constants.translationX,
+                        y: source.view.frame.width * Constants.translationYMultiplier
+                    )
                     let scale = CGAffineTransform(rotationAngle: .pi / Constants.rotationPiDivider)
                     source.view.transform = translation.concatenating(scale)
                 }
