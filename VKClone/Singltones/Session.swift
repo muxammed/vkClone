@@ -5,6 +5,7 @@
 class Session {
     var token = ""
     var userId = ""
+    var apiVersion = "5.131"
 
     static let instance = Session()
 
