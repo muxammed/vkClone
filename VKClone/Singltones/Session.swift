@@ -2,12 +2,16 @@
 // Copyright © RoadMap. All rights reserved.
 
 /// Сессия хранит данные токена и айди пользователя
-class Session {
+final class Session {
+    static let shared = Session()
+
+    // MARK: - Public properties
+
     var token = ""
     var userId = ""
     var apiVersion = "5.131"
 
-    static let instance = Session()
+    // MARK: - Initializators
 
     private init() {}
 }

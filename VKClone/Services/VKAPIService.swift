@@ -7,56 +7,63 @@ import Foundation
 /// Апи запросы
 class VKAPIService {
     // MARK: - Public properties
+
     let baseUrl = "https://api.vk.com"
     var apiAccessToken = ""
     var apiUserId = ""
-    let apiVersion = Session.instance.apiVersion
+    let apiVersion = Session.shared.apiVersion
 
     // MARK: - Public methods
-    func loadMyFriends() {
+
+    func fetchMyFriends() {
         let path = Constants.friendsGetPathString
         let parameters: Parameters = [
             Constants.accessTokenFieldName: apiAccessToken,
             Constants.userIdFieldName: apiUserId,
             Constants.versionFieldName: apiVersion,
-            Constants.fieldsFieldName: [Constants.photoFieldName, Constants.nicknameFieldName, Constants.onlineFieldName, Constants.sexFieldName]
+            Constants.fieldsFieldName: [
+                Constants.photoFieldName,
+                Constants.nicknameFieldName,
+                Constants.onlineFieldName,
+                Constants.sexFieldName
+            ]
         ]
-        let url = baseUrl + path
+        let url = "\(baseUrl)\(path)"
         AF.request(url, method: .post, parameters: parameters)
             .responseDecodable(of: VKAPIResponse.self) { data in
                 debugPrint(data)
             }
     }
 
-    func loadMyPhotos() {
+    func fetchMyPhotos() {
         let path = Constants.getPhotosPathString
         let parameters: Parameters = [
             Constants.accessTokenFieldName: apiAccessToken,
             Constants.ownerIdFieldName: apiUserId,
             Constants.versionFieldName: apiVersion
         ]
-        let url = baseUrl + path
+        let url = "\(baseUrl)\(path)"
         AF.request(url, method: .post, parameters: parameters)
             .response { data in
                 debugPrint(data)
             }
     }
 
-    func loadMyGroups() {
+    func fetchMyGroups() {
         let path = Constants.getGroupsPathString
         let parameters: Parameters = [
             Constants.accessTokenFieldName: apiAccessToken,
             Constants.userIdFieldName: apiUserId,
             Constants.versionFieldName: apiVersion
         ]
-        let url = baseUrl + path
+        let url = "\(baseUrl)\(path)"
         AF.request(url, method: .post, parameters: parameters)
             .response { data in
                 debugPrint(data)
             }
     }
 
-    func searchMyGroups(by: String) {
+    func fetchGroups(by: String) {
         let path = Constants.searchGroupsByPathString
         let parameters: Parameters = [
             Constants.accessTokenFieldName: apiAccessToken,
@@ -64,7 +71,7 @@ class VKAPIService {
             Constants.queryFieldName: by,
             Constants.versionFieldName: apiVersion
         ]
-        let url = baseUrl + path
+        let url = "\(baseUrl)\(path)"
         AF.request(url, method: .post, parameters: parameters)
             .response { data in
                 debugPrint(data)

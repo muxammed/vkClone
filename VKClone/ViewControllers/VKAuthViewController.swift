@@ -17,7 +17,7 @@ final class VKAuthViewController: UIViewController {
     // MARK: - Private properties
 
     private let apiService = VKAPIService()
-    private var session = Session.instance
+    private var session = Session.shared
 
     // MARK: - Life cycle
 
@@ -29,19 +29,19 @@ final class VKAuthViewController: UIViewController {
     // MARK: - IBActions
 
     @IBAction private func loadFriendAction() {
-        apiService.loadMyFriends()
+        apiService.fetchMyFriends()
     }
 
     @IBAction private func loadPhotosAction() {
-        apiService.loadMyPhotos()
+        apiService.fetchMyPhotos()
     }
 
     @IBAction private func loadGroupsAction() {
-        apiService.loadMyGroups()
+        apiService.fetchMyGroups()
     }
 
     @IBAction private func searchGroupsAction() {
-        apiService.searchMyGroups(by: groupSearchTextField.text ?? "")
+        apiService.fetchGroups(by: groupSearchTextField.text ?? "")
     }
 
     // MARK: - Private methods
@@ -92,8 +92,8 @@ extension VKAuthViewController: WKNavigationDelegate {
 
         let token = params[Constants.accessToken]
         let userId = params[Constants.userId]
-        Session.instance.userId = userId ?? ""
-        Session.instance.token = token ?? ""
+        Session.shared.userId = userId ?? ""
+        Session.shared.token = token ?? ""
         apiService.apiAccessToken = token ?? ""
         apiService.apiUserId = userId ?? ""
         authWebView.removeFromSuperview()

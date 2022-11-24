@@ -11,7 +11,7 @@ final class PhotoGalleryViewController: UIViewController {
 
     // MARK: - Public properties
 
-    var userImagesArray: [String]?
+    var userImages: [String]?
 
     // MARK: - Private properties
 
@@ -84,7 +84,7 @@ final class PhotoGalleryViewController: UIViewController {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.image = UIImage(named: userImagesArray?[index] ?? "")
+        imageView.image = UIImage(named: userImages?[index] ?? "")
         imageView.isUserInteractionEnabled = true
 
         let leftSwipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(swipeAction))
@@ -104,7 +104,7 @@ final class PhotoGalleryViewController: UIViewController {
     }
 
     private func createDummyImageViews() {
-        guard let userImagesArray = userImagesArray else { return }
+        guard let userImagesArray = userImages else { return }
         for ind in 0 ..< userImagesArray.count {
             let imageView = createImageView(with: ind)
             userImageViewsArray.append(imageView)
