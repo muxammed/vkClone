@@ -46,7 +46,7 @@ final class NewsViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let selectedNews = selectedNews,
               let photoGalleryViewController = segue.destination as? PhotoGalleryViewController else { return }
-        photoGalleryViewController.userImagesArray = selectedNews.newsPhotos
+        photoGalleryViewController.userImages = selectedNews.newsPhotos
     }
 
     // MARK: - Private methods

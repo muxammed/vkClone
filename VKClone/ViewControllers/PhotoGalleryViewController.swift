@@ -9,10 +9,13 @@ final class PhotoGalleryViewController: UIViewController {
 
     @IBOutlet private var photoLoadingView: LoadingView!
 
+    // MARK: - Public properties
+
+    var userImages: [String]?
+
     // MARK: - Private properties
 
     private var currentImage = 0
-    private var userImagesArray: [String]?
     private var userImageViewsArray: [UIImageView] = []
 
     // MARK: - Life cycle
@@ -81,7 +84,7 @@ final class PhotoGalleryViewController: UIViewController {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.image = UIImage(named: userImagesArray?[index] ?? "")
+        imageView.image = UIImage(named: userImages?[index] ?? "")
         imageView.isUserInteractionEnabled = true
 
         let leftSwipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(swipeAction))
@@ -101,7 +104,7 @@ final class PhotoGalleryViewController: UIViewController {
     }
 
     private func createDummyImageViews() {
-        guard let userImagesArray = userImagesArray else { return }
+        guard let userImagesArray = userImages else { return }
         for ind in 0 ..< userImagesArray.count {
             let imageView = createImageView(with: ind)
             userImageViewsArray.append(imageView)
