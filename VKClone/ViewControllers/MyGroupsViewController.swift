@@ -5,12 +5,15 @@ import UIKit
 
 /// экран список груп
 final class MyGroupsViewController: UITableViewController {
-    // MARK: - Private properties
+    // MARK: - Public properties
 
     var currentUser: User?
     var otherGroups: [VKGroup]?
-    private var vkGroups: [VKGroup]?
+
+    // MARK: - Private properties
+
     private let apiService = VKAPIService()
+    private var vkGroups: [VKGroup]?
     private var session = Session.shared
 
     // MARK: - Life cycle
@@ -52,10 +55,11 @@ final class MyGroupsViewController: UITableViewController {
         tableView.reloadData()
         apiService.apiAccessToken = session.token
         apiService.apiUserId = session.userId
-        apiService.fetchMyGroups(completion: { groups in
+        apiService.fetchMyGroups { [weak self] groups in
+            guard let self = self else { return }
             self.vkGroups = groups
             self.tableView.reloadData()
-        })
+        }
     }
 
     private func fillDummyUser() {

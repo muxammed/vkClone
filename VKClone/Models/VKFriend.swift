@@ -25,15 +25,3 @@ final class VKFriend: Object, Codable {
         case isClosed = "is_closed"
     }
 }
-
-//
-///// для удобного выявления уникальных первых букв в имени друга
-// extension VKFriend: Hashable {
-////    override var hash: Int {
-////        hasher.combine(id)
-////    }
-//
-//    static func == (lhs: VKFriend, rhs: VKFriend) -> Bool {
-//        lhs.id == rhs.id
-//    }
-// }

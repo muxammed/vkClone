@@ -46,9 +46,8 @@ final class MainViewController: UITableViewController {
 
     private func fetchMyFriend() {
         clearTableViewAction()
-        apiService.apiAccessToken = session.token
-        apiService.apiUserId = session.userId
-        apiService.fetchMyFriends { friends in
+        apiService.fetchMyFriends { [weak self] friends in
+            guard let self = self else { return }
             self.myFriendsFromApi = friends
             self.sortByLettersVK(array: friends)
             self.tableView.reloadData()

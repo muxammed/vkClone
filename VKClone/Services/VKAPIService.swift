@@ -15,7 +15,21 @@ class VKAPIService {
 
     // MARK: - Public methods
 
+    func downloadImageFrom(urlString: URL, completion: @escaping (UIImage) -> Void) {
+        let task = URLSession.shared.dataTask(with: urlString) { data, _, error in
+            if error != nil {
+                print("ERROR \(String(describing: error))")
+            }
+            guard let data = data,
+                  let downloadedImage = UIImage(data: data) else { return }
+            completion(downloadedImage)
+        }
+        task.resume()
+    }
+
     func fetchMyFriends(completion: @escaping ([VKFriend]) -> Void) {
+        apiAccessToken = Session.shared.token
+        apiUserId = Session.shared.userId
         let path = Constants.friendsGetPathString
         let parameters: Parameters = [
             Constants.accessTokenFieldName: apiAccessToken,
@@ -39,7 +53,7 @@ class VKAPIService {
                 completion(friendsResponse.response.items)
             } else {
                 let errorResponse = response.error
-                print("API error with message: \(errorResponse?.localizedDescription ?? "")")
+                print(errorResponse?.localizedDescription ?? "")
             }
         }
     }
@@ -73,7 +87,7 @@ class VKAPIService {
                     completion(friendsResponse.response.items)
                 } else {
                     let errorResponse = response.error
-                    print("API error with message: \(errorResponse?.localizedDescription ?? "")")
+                    print(errorResponse?.localizedDescription ?? "")
                 }
             }
     }
