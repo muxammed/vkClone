@@ -16,7 +16,7 @@ final class GroupsViewController: UIViewController {
 
     // MARK: - Public properties
 
-    var groups: [Group]?
+    var groups: [VKGroup]?
     var user: User?
 
     // MARK: - Life cycle

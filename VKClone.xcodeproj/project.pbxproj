@@ -28,6 +28,8 @@
 		13991A97291BED6A00A21DEB /* LoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13991A96291BED6A00A21DEB /* LoadingView.xib */; };
 		13991A9B291BFBFF00A21DEB /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13991A9A291BFBFF00A21DEB /* LoadingView.swift */; };
 		13AA03DF29129960000BF17C /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13AA03DE29129960000BF17C /* UIViewController+Extension.swift */; };
+		13F187672933F6A400B3ABC6 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F187662933F6A400B3ABC6 /* UIImageView+Extension.swift */; };
+		13F18769293412E700B3ABC6 /* VKGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F18768293412E700B3ABC6 /* VKGroup.swift */; };
 		13F7BAF129183B5000A10E05 /* SFProDisplay-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 13F7BAEF29183B5000A10E05 /* SFProDisplay-Semibold.ttf */; };
 		13F7BAF229183B5000A10E05 /* SFProDisplay-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 13F7BAF029183B5000A10E05 /* SFProDisplay-Regular.ttf */; };
 		13F7BAF52918456800A10E05 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F7BAF42918456800A10E05 /* Friend.swift */; };
@@ -75,6 +77,8 @@
 		13991A96291BED6A00A21DEB /* LoadingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingView.xib; sourceTree = "<group>"; };
 		13991A9A291BFBFF00A21DEB /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		13AA03DE29129960000BF17C /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		13F187662933F6A400B3ABC6 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
+		13F18768293412E700B3ABC6 /* VKGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKGroup.swift; sourceTree = "<group>"; };
 		13F7BAEF29183B5000A10E05 /* SFProDisplay-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Semibold.ttf"; sourceTree = "<group>"; };
 		13F7BAF029183B5000A10E05 /* SFProDisplay-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Regular.ttf"; sourceTree = "<group>"; };
 		13F7BAF42918456800A10E05 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
@@ -143,6 +147,15 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		13F187652933F68400B3ABC6 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				13AA03DE29129960000BF17C /* UIViewController+Extension.swift */,
+				13F187662933F6A400B3ABC6 /* UIImageView+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		13F7BAEE2918382000A10E05 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -162,6 +175,7 @@
 				130007252919E61F00659E31 /* News.swift */,
 				1394CDFF292D9CFE00C6B2C1 /* VKFriend.swift */,
 				1394CE01292D9E1500C6B2C1 /* VKAPIResponse.swift */,
+				13F18768293412E700B3ABC6 /* VKGroup.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -200,7 +214,7 @@
 				13FDFB272912043B003DDD1F /* Assets.xcassets */,
 				13FDFB292912043B003DDD1F /* LaunchScreen.storyboard */,
 				13FDFB2C2912043B003DDD1F /* Info.plist */,
-				13AA03DE29129960000BF17C /* UIViewController+Extension.swift */,
+				13F187652933F68400B3ABC6 /* Extensions */,
 			);
 			path = VKClone;
 			sourceTree = "<group>";
@@ -429,6 +443,7 @@
 				130007282919E77D00659E31 /* NewsViewController.swift in Sources */,
 				130007312919EF8C00659E31 /* ReactionView.swift in Sources */,
 				13F7BAF52918456800A10E05 /* Friend.swift in Sources */,
+				13F18769293412E700B3ABC6 /* VKGroup.swift in Sources */,
 				13F7BB0D2918DAF400A10E05 /* ImageViewBackView.swift in Sources */,
 				130007222919CF7000659E31 /* LetterFriend.swift in Sources */,
 				13F7BAFD29185C6000A10E05 /* FriendPhotosViewController.swift in Sources */,
@@ -450,6 +465,7 @@
 				13F7BB0F2918DCA300A10E05 /* LikesView.swift in Sources */,
 				13F7BAFB2918518300A10E05 /* FriendViewCell.swift in Sources */,
 				13F7BAFF29187B8200A10E05 /* PhotoViewCell.swift in Sources */,
+				13F187672933F6A400B3ABC6 /* UIImageView+Extension.swift in Sources */,
 				13991A9B291BFBFF00A21DEB /* LoadingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

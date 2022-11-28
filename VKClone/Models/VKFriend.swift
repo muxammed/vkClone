@@ -1,24 +1,39 @@
 // VKFriend.swift
 // Copyright © RoadMap. All rights reserved.
 
+import RealmSwift
+
 /// Друг из ВК
-struct VKFriend: Codable {
-    let id: Int
-    let photoThumb: String
-    let online: Int
-    let firstName: String
-    let lastName: String
-    let sex: Int
+final class VKFriend: Object, Codable {
+    @objc dynamic var id: Int
+    @objc dynamic var nickname, trackCode: String
+    @objc dynamic var sex: Int
+    @objc dynamic var photo100: String
+    @objc dynamic var online: Int
+    @objc dynamic var firstName, lastName: String
+    @objc dynamic var canAccessClosed, isClosed: Bool
 
     enum CodingKeys: String, CodingKey {
-        case id, online, sex
-        case photoThumb = "photo_100"
+        case id, nickname
+        case trackCode = "track_code"
+        case sex
+        case photo100 = "photo_100"
+        case online
         case firstName = "first_name"
         case lastName = "last_name"
-    }
-
-    func printMyFriend() {
-        let genderText = sex == 1 ? "моя подруга" : "мой друг"
-        print("\(firstName) \(lastName) \(genderText)")
+        case canAccessClosed = "can_access_closed"
+        case isClosed = "is_closed"
     }
 }
+
+//
+///// для удобного выявления уникальных первых букв в имени друга
+// extension VKFriend: Hashable {
+////    override var hash: Int {
+////        hasher.combine(id)
+////    }
+//
+//    static func == (lhs: VKFriend, rhs: VKFriend) -> Bool {
+//        lhs.id == rhs.id
+//    }
+// }

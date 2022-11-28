@@ -29,14 +29,13 @@ final class GroupViewCell: UITableViewCell {
         UINib(nibName: GroupViewCell.identifier, bundle: nil)
     }
 
-    func configure(with group: Group, isJoined: Bool, indexPath: IndexPath) {
-        groupNameLabel.text = group.groupName
-        groupImageView.image = UIImage(named: group.groupImageName)
-        joinButton.isHidden = isJoined
-        // joinButton.addTarget(self, action: #selector(joinButtonAction), for: .touchUpInside)
-        currentGroup = group
+    func configure(with group: VKGroup, isJoined: Bool, indexPath: IndexPath) {
+        groupNameLabel.text = group.name
+        joinButton.isHidden = true
         currentIndexPath = indexPath
         joinButton.addTarget(self, action: #selector(joinButtonLeavedAction), for: .touchCancel)
+        guard let urlString = URL(string: group.photoUrl) else { return }
+        groupImageView.downloadImageInto(from: urlString)
     }
 
     // MARK: - Private methods

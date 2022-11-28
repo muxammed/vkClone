@@ -143,6 +143,7 @@
                     <connections>
                         <segue destination="Vs8-lB-lln" kind="presentation" identifier="goToLogin" modalPresentationStyle="fullScreen" id="HrU-OB-Qig"/>
                         <segue destination="noJ-qt-3kh" kind="show" identifier="goToPhotos" id="7o5-Wi-ame"/>
+                        <segue destination="fMX-WD-dte" kind="presentation" identifier="goToAuth" modalPresentationStyle="fullScreen" id="HOq-vu-YUD"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x4B-ur-LyF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -333,7 +334,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oUw-Do-9c0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2623.0769230769229" y="526.77725118483409"/>
+            <point key="canvasLocation" x="2394" y="544"/>
         </scene>
         <!--My Groups-->
         <scene sceneID="BtU-Ol-cZp">
@@ -565,7 +566,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R0G-Ib-lCi">
-                                <rect key="frame" x="0.0" y="88" width="390" height="673"/>
+                                <rect key="frame" x="0.0" y="88" width="390" height="722"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
@@ -647,6 +648,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fMX-WD-dte" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="VK Auth" image="key.icloud" catalog="system" selectedImage="key.icloud.fill" id="W9c-rl-1D5"/>
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="JKD-gh-KYS"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ItF-fe-vBa">
                         <rect key="frame" x="0.0" y="44" width="390" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -661,6 +663,9 @@
             <point key="canvasLocation" x="2702" y="-1012"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="HOq-vu-YUD"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="key.icloud" catalog="system" width="128" height="88"/>
         <image name="key.icloud.fill" catalog="system" width="128" height="88"/>

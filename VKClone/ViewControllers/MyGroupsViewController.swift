@@ -8,15 +8,17 @@ final class MyGroupsViewController: UITableViewController {
     // MARK: - Private properties
 
     var currentUser: User?
-    var otherGroups: [Group]?
+    var otherGroups: [VKGroup]?
+    private var vkGroups: [VKGroup]?
+    private let apiService = VKAPIService()
+    private var session = Session.shared
 
     // MARK: - Life cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         configTabelView()
-        fillDummyUser()
-        fillDummyGroups()
+        fetchMyGroups()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -45,6 +47,17 @@ final class MyGroupsViewController: UITableViewController {
         tableView.register(GroupViewCell.nib(), forCellReuseIdentifier: GroupViewCell.identifier)
     }
 
+    private func fetchMyGroups() {
+        vkGroups?.removeAll()
+        tableView.reloadData()
+        apiService.apiAccessToken = session.token
+        apiService.apiUserId = session.userId
+        apiService.fetchMyGroups(completion: { groups in
+            self.vkGroups = groups
+            self.tableView.reloadData()
+        })
+    }
+
     private func fillDummyUser() {
         currentUser = User(username: Constants.userName, joinedGroups: [])
         for ind in 0 ... 7 {
@@ -56,23 +69,12 @@ final class MyGroupsViewController: UITableViewController {
         }
         tableView.reloadData()
     }
-
-    private func fillDummyGroups() {
-        otherGroups = [Group]()
-        for ind in 0 ... 7 {
-            let group = Group(
-                groupName: Constants.notJoinedGroupPrefix + "\(ind)",
-                groupImageName: Constants.groupPhotoPrefix + "\(ind)"
-            )
-            otherGroups?.append(group)
-        }
-    }
 }
 
 /// UITableViewDelegate, UITableViewDelegate
 extension MyGroupsViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        currentUser?.joinedGroups.count ?? 0
+        vkGroups?.count ?? 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -80,8 +82,8 @@ extension MyGroupsViewController {
             withIdentifier: GroupViewCell.identifier,
             for: indexPath
         ) as? GroupViewCell {
-            guard let currentUser = currentUser else { return UITableViewCell() }
-            cell.configure(with: currentUser.joinedGroups[indexPath.item], isJoined: true, indexPath: indexPath)
+            guard let vkGroups = vkGroups else { return UITableViewCell() }
+            cell.configure(with: vkGroups[indexPath.item], isJoined: true, indexPath: indexPath)
             return cell
         }
         return UITableViewCell()
@@ -95,7 +97,6 @@ extension MyGroupsViewController {
         if editingStyle == .delete {
             guard var otherGroups = otherGroups,
                   var currentUser = currentUser else { return }
-            otherGroups.append(currentUser.joinedGroups[indexPath.item])
             currentUser.joinedGroups.remove(at: indexPath.item)
             self.otherGroups = otherGroups
             self.currentUser = currentUser

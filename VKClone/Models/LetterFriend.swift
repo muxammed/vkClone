@@ -6,3 +6,9 @@ struct LetterFriend {
     let letter: String
     let friends: [Friend]
 }
+
+/// друга и первой буквы для удобного использования
+struct LetterVKFriend {
+    let letter: String
+    let friends: [VKFriend]
+}

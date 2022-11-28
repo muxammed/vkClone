@@ -1,13 +1,15 @@
 // VKAPIResponse.swift
 // Copyright © RoadMap. All rights reserved.
 
-/// Рутовый ответ от ВК АПИ
-struct VKAPIResponse: Codable {
-    let response: VKResponse
-}
+import RealmSwift
 
-/// Более нижняя ветвь
-struct VKResponse: Codable {
-    let count: Int
-    let items: [VKFriend]
+/// Рутовый дженерик ответ от ВК АПИ
+struct VKAPIResponse<T>: Decodable where T: Decodable {
+    let response: VKResponse
+
+    /// Более нижняя ветвь
+    struct VKResponse: Decodable {
+        let count: Int
+        let items: [T]
+    }
 }
