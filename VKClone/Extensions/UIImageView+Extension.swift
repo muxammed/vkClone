@@ -3,12 +3,12 @@
 
 import UIKit
 
-/// Разширение для UIIMageView для скачивание изображения в него
+/// Разширение для UIImageView для скачивание изображения в него
 extension UIImageView {
-    func downloadImageInto(from: URL) {
+    func downloadImageInto(from: URL, vkApiService: VKAPIService) {
         image = nil
-        let vkApiService = VKAPIService()
-        vkApiService.downloadImageFrom(urlString: from) { downloadedImage in
+        vkApiService.downloadImageFrom(urlString: from) { [weak self] downloadedImage in
+            guard let self = self else { return }
             DispatchQueue.main.async {
                 self.image = downloadedImage
             }

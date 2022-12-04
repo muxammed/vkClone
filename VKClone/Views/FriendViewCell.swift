@@ -56,7 +56,7 @@ import UIKit
         messageButton.isHidden = !hasButtons
     }
 
-    func configure(with friend: VKFriend, hasButtons: Bool = true) {
+    func configure(with friend: VKFriend, hasButtons: Bool = true, vkApiService: VKAPIService) {
         currentVKFriend = friend
         self.hasButtons = hasButtons
         guard let friendNickLabel = friendNickLabel,
@@ -66,7 +66,7 @@ import UIKit
         callButton.isHidden = !hasButtons
         messageButton.isHidden = !hasButtons
         guard let imageUrl = URL(string: friend.photo100) else { return }
-        friendImageView.downloadImageInto(from: imageUrl)
+        friendImageView.downloadImageInto(from: imageUrl, vkApiService: vkApiService)
     }
 }
 

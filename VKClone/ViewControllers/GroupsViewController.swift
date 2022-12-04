@@ -19,6 +19,10 @@ final class GroupsViewController: UIViewController {
     var groups: [VKGroup]?
     var user: User?
 
+    // MARK: - Private properties
+
+    let vkApiService = VKAPIService()
+
     // MARK: - Life cycle
 
     override func viewDidLoad() {
@@ -67,7 +71,7 @@ extension GroupsViewController: UITableViewDelegate, UITableViewDataSource {
             for: indexPath
         ) as? GroupViewCell,
             let groups = groups else { return UITableViewCell() }
-        cell.configure(with: groups[indexPath.item], isJoined: false, indexPath: indexPath)
+        cell.configure(with: groups[indexPath.item], isJoined: false, indexPath: indexPath, vkApiService: vkApiService)
         cell.delegate = self
         return cell
     }

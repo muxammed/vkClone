@@ -87,7 +87,12 @@ extension MyGroupsViewController {
             for: indexPath
         ) as? GroupViewCell {
             guard let vkGroups = vkGroups else { return UITableViewCell() }
-            cell.configure(with: vkGroups[indexPath.item], isJoined: true, indexPath: indexPath)
+            cell.configure(
+                with: vkGroups[indexPath.item],
+                isJoined: true,
+                indexPath: indexPath,
+                vkApiService: apiService
+            )
             return cell
         }
         return UITableViewCell()
