@@ -10,14 +10,18 @@ final class MainViewController: UITableViewController {
     private var isLoggedIn = false
     private var myFriends: [Friend] = []
     private var sortedMyFriendsMap: [LetterFriend] = []
+    private var sortedMyVKFriendsMap: [LetterVKFriend] = []
     private var selectedFriend: Friend?
+    private var selectedVKFriend: VKFriend?
+    private let apiService = VKAPIService()
+    private var myFriendsFromApi: [VKFriend] = []
+    private var session = Session.shared
 
     // MARK: - Life cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        loadDummyFriends()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -28,6 +32,7 @@ final class MainViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         checkLoggedIn()
+        fetchMyFriend()
     }
 
     // MARK: - Public methods
@@ -39,142 +44,35 @@ final class MainViewController: UITableViewController {
 
     // MARK: - Private methods
 
-    private func loadDummyFriends() {
-        myFriends = [
-            Friend(
-                friendNickName: "Friend",
-                friendImageName: Constants.friendImageNameText,
-                friendGroupName: "",
-                photos: [
-                    Photo(photoName: "photo1", likesCount: 10),
-                    Photo(photoName: "photo2", likesCount: 1),
-                    Photo(photoName: "photo3", likesCount: 12)
-                ]
-            ), Friend(
-                friendNickName: "Friend2",
-                friendImageName: Constants.friendImageNameText,
-                friendGroupName: "",
-                photos: [
-                    Photo(photoName: "photo4", likesCount: 10),
-                    Photo(photoName: "photo5", likesCount: 14),
-                    Photo(photoName: "photo6", likesCount: 13)
-                ]
-            ), Friend(
-                friendNickName: "Friend3",
-                friendImageName: Constants.friendImageNameText,
-                friendGroupName: "Команда ВКонтакте",
-                photos: [
-                    Photo(photoName: "photo7", likesCount: 11),
-                    Photo(photoName: "photo1", likesCount: 16),
-                    Photo(photoName: "photo2", likesCount: 18)
-                ]
-            ), Friend(
-                friendNickName: "Ariend4",
-                friendImageName: Constants.friendImageNameText,
-                friendGroupName: "",
-                photos: [
-                    Photo(photoName: "photo3", likesCount: 15),
-                    Photo(photoName: "photo4", likesCount: 15),
-                    Photo(photoName: "photo5", likesCount: 19)
-                ]
-            ), Friend(
-                friendNickName: "Friend5",
-                friendImageName: Constants.friendImageNameText,
-                friendGroupName: "Команда ВКонтакте",
-                photos: [
-                    Photo(photoName: "photo6", likesCount: 10),
-                    Photo(photoName: "photo7", likesCount: 10),
-                    Photo(photoName: "photo1", likesCount: 10)
-                ]
-            ), Friend(
-                friendNickName: "Ariend6",
-                friendImageName: Constants.friendImageNameText,
-                friendGroupName: "",
-                photos: [
-                    Photo(photoName: "photo2", likesCount: 10),
-                    Photo(photoName: "photo3", likesCount: 10),
-                    Photo(photoName: "photo4", likesCount: 10)
-                ]
-            ),
-            Friend(
-                friendNickName: "UFriend",
-                friendImageName: Constants.friendImageNameText,
-                friendGroupName: "",
-                photos: [
-                    Photo(photoName: "photo1", likesCount: 10),
-                    Photo(photoName: "photo2", likesCount: 1),
-                    Photo(photoName: "photo3", likesCount: 12)
-                ]
-            ), Friend(
-                friendNickName: "ZFriend2",
-                friendImageName: Constants.friendImageNameText,
-                friendGroupName: "",
-                photos: [
-                    Photo(photoName: "photo4", likesCount: 10),
-                    Photo(photoName: "photo5", likesCount: 14),
-                    Photo(photoName: "photo6", likesCount: 13)
-                ]
-            ), Friend(
-                friendNickName: "ZFriend3",
-                friendImageName: Constants.friendImageNameText,
-                friendGroupName: "Команда ВКонтакте",
-                photos: [
-                    Photo(photoName: "photo7", likesCount: 11),
-                    Photo(photoName: "photo1", likesCount: 16),
-                    Photo(photoName: "photo2", likesCount: 18)
-                ]
-            ), Friend(
-                friendNickName: "UAriend4",
-                friendImageName: Constants.friendImageNameText,
-                friendGroupName: "",
-                photos: [
-                    Photo(photoName: "photo3", likesCount: 15),
-                    Photo(photoName: "photo4", likesCount: 15),
-                    Photo(photoName: "photo5", likesCount: 19)
-                ]
-            ), Friend(
-                friendNickName: "DFriend5",
-                friendImageName: Constants.friendImageNameText,
-                friendGroupName: "Команда ВКонтакте",
-                photos: [
-                    Photo(photoName: "photo6", likesCount: 10),
-                    Photo(photoName: "photo7", likesCount: 10),
-                    Photo(photoName: "photo1", likesCount: 10)
-                ]
-            ), Friend(
-                friendNickName: "DoAriend6",
-                friendImageName: Constants.friendImageNameText,
-                friendGroupName: "",
-                photos: [
-                    Photo(photoName: "photo2", likesCount: 10),
-                    Photo(photoName: "photo3", likesCount: 10),
-                    Photo(photoName: "photo4", likesCount: 10)
-                ]
-            )
-        ]
-        tableView.reloadData()
-        sortByLetters(array: myFriends)
+    private func fetchMyFriend() {
+        clearTableViewAction()
+        apiService.fetchMyFriends { [weak self] friends in
+            guard let self = self else { return }
+            self.myFriendsFromApi = friends
+            self.sortByLettersVK(array: friends)
+            self.tableView.reloadData()
+        }
     }
 
-    private func sortByLetters(array: [Friend]) {
+    private func sortByLettersVK(array: [VKFriend]) {
         let letters = Array(Set(array))
         for letter in letters {
-            guard let firstLetter = letter.friendNickName.first else { return }
-            let sortedByLetter = array.filter { $0.friendNickName.first?.lowercased() == firstLetter.lowercased() }
-            let letterFriend = LetterFriend(letter: "\(firstLetter)", friends: sortedByLetter)
-            sortedMyFriendsMap.append(letterFriend)
+            guard let firstLetter = letter.firstName.first else { return }
+            let sortedByLetter = array.filter { $0.firstName.first?.lowercased() == firstLetter.lowercased() }
+            let letterFriend = LetterVKFriend(letter: "\(firstLetter)", friends: sortedByLetter)
+            sortedMyVKFriendsMap.append(letterFriend)
         }
-        sortedMyFriendsMap.sort(by: { $0.letter < $1.letter })
+        sortedMyVKFriendsMap.sort(by: { $0.letter < $1.letter })
     }
 
     private func checkLoggedIn() {
         if !isLoggedIn {
-            performSegue(withIdentifier: Constants.goToLoginSegueIdentifier, sender: self)
+            performSegue(withIdentifier: Constants.goToAuthSegueIdentifier, sender: self)
         }
     }
 
     private func checkLoggedInAction() {
-        isLoggedIn = UserDefaults.standard.bool(forKey: Constants.isLoggedIn)
+        isLoggedIn = session.token.isEmpty ? false : true
     }
 
     private func setupViews() {
@@ -182,7 +80,7 @@ final class MainViewController: UITableViewController {
     }
 
     private func clearTableViewAction() {
-        sortedMyFriendsMap.removeAll()
+        sortedMyVKFriendsMap.removeAll()
         tableView.reloadData()
     }
 
@@ -190,7 +88,7 @@ final class MainViewController: UITableViewController {
         let headerView = UIView()
         headerView.backgroundColor = .black.withAlphaComponent(0.5)
         let letterLabel = UILabel()
-        letterLabel.text = sortedMyFriendsMap[section].letter
+        letterLabel.text = sortedMyVKFriendsMap[section].letter
         letterLabel.font = UIFont.systemFont(ofSize: 17, weight: .bold)
         letterLabel.textColor = .white
         letterLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -214,6 +112,7 @@ final class MainViewController: UITableViewController {
 extension MainViewController {
     enum Constants {
         static let goToLoginSegueIdentifier = "goToLogin"
+        static let goToAuthSegueIdentifier = "goToAuth"
         static let isLoggedIn = "isLoggedIn"
         static let goToPhotosText = "goToPhotos"
         static let friendsTitle = "My friends"
@@ -225,11 +124,11 @@ extension MainViewController {
 /// UITableViewDataSourceDelegate, UITableViewDelegate
 extension MainViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
-        sortedMyFriendsMap.count
+        sortedMyVKFriendsMap.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        sortedMyFriendsMap[section].friends.count
+        sortedMyVKFriendsMap[section].friends.count
     }
 
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -242,14 +141,14 @@ extension MainViewController {
         cellForRowAt indexPath: IndexPath
     ) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: FriendViewCell.identifier) as? FriendViewCell {
-            cell.configure(with: sortedMyFriendsMap[indexPath.section].friends[indexPath.item])
+            cell.configure(with: sortedMyVKFriendsMap[indexPath.section].friends[indexPath.item])
             return cell
         }
         return UITableViewCell()
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedFriend = myFriends[indexPath.item]
+        selectedVKFriend = myFriendsFromApi[indexPath.item]
         performSegue(withIdentifier: Constants.goToPhotosSegueName, sender: self)
     }
 }
@@ -258,15 +157,17 @@ extension MainViewController {
 extension MainViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         clearTableViewAction()
-        let filteredFriendsArray = myFriends.filter { $0.friendNickName.contains(searchBar.searchTextField.text ?? "") }
-        sortByLetters(array: filteredFriendsArray)
+        let filteredFriendsArray = myFriendsFromApi.filter {
+            $0.firstName.contains(searchBar.searchTextField.text ?? "")
+        }
+        sortByLettersVK(array: filteredFriendsArray)
         tableView.reloadData()
         searchBar.searchTextField.endEditing(true)
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         clearTableViewAction()
-        sortByLetters(array: myFriends)
+        sortByLettersVK(array: myFriendsFromApi)
         tableView.reloadData()
         searchBar.searchTextField.text = ""
         searchBar.searchTextField.endEditing(true)

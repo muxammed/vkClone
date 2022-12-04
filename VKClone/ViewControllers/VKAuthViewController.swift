@@ -29,7 +29,9 @@ final class VKAuthViewController: UIViewController {
     // MARK: - IBActions
 
     @IBAction private func loadFriendAction() {
-        apiService.fetchMyFriends()
+        apiService.fetchMyFriends { friends in
+            debugPrint(friends)
+        }
     }
 
     @IBAction private func loadPhotosAction() {
@@ -37,7 +39,9 @@ final class VKAuthViewController: UIViewController {
     }
 
     @IBAction private func loadGroupsAction() {
-        apiService.fetchMyGroups()
+        apiService.fetchMyGroups { groups in
+            debugPrint(groups)
+        }
     }
 
     @IBAction private func searchGroupsAction() {
@@ -97,6 +101,7 @@ extension VKAuthViewController: WKNavigationDelegate {
         apiService.apiAccessToken = token ?? ""
         apiService.apiUserId = userId ?? ""
         authWebView.removeFromSuperview()
+        dismiss(animated: true, completion: nil)
         decisionHandler(.cancel)
     }
 }

@@ -20,6 +20,7 @@ import UIKit
     // MARK: - Private properties
 
     private var currentFriend: Friend?
+    private var currentVKFriend: VKFriend?
     private var hasButtons: Bool?
 
     // MARK: - Public methods
@@ -53,6 +54,19 @@ import UIKit
 
         callButton.isHidden = !hasButtons
         messageButton.isHidden = !hasButtons
+    }
+
+    func configure(with friend: VKFriend, hasButtons: Bool = true, vkApiService: VKAPIService) {
+        currentVKFriend = friend
+        self.hasButtons = hasButtons
+        guard let friendNickLabel = friendNickLabel,
+              let friendImageView = friendImageView else { return }
+        friendNickLabel.text = friend.firstName
+        friendGroupLabel.removeFromSuperview()
+        callButton.isHidden = !hasButtons
+        messageButton.isHidden = !hasButtons
+        guard let imageUrl = URL(string: friend.photo100) else { return }
+        friendImageView.downloadImageInto(from: imageUrl, vkApiService: vkApiService)
     }
 }
 

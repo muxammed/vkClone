@@ -15,7 +15,21 @@ class VKAPIService {
 
     // MARK: - Public methods
 
-    func fetchMyFriends() {
+    func downloadImageFrom(urlString: URL, completion: @escaping (UIImage) -> Void) {
+        let task = URLSession.shared.dataTask(with: urlString) { data, _, error in
+            if error != nil {
+                print("ERROR \(String(describing: error))")
+            }
+            guard let data = data,
+                  let downloadedImage = UIImage(data: data) else { return }
+            completion(downloadedImage)
+        }
+        task.resume()
+    }
+
+    func fetchMyFriends(completion: @escaping ([VKFriend]) -> Void) {
+        apiAccessToken = Session.shared.token
+        apiUserId = Session.shared.userId
         let path = Constants.friendsGetPathString
         let parameters: Parameters = [
             Constants.accessTokenFieldName: apiAccessToken,
@@ -29,10 +43,19 @@ class VKAPIService {
             ]
         ]
         let url = "\(baseUrl)\(path)"
-        AF.request(url, method: .post, parameters: parameters)
-            .responseDecodable(of: VKAPIResponse.self) { data in
-                debugPrint(data)
+        AF.request(
+            url,
+            method: .post,
+            parameters: parameters
+        )
+        .responseDecodable { (response: DataResponse<VKAPIResponse<VKFriend>, AFError>) in
+            if let friendsResponse = response.value {
+                completion(friendsResponse.response.items)
+            } else {
+                let errorResponse = response.error
+                print(errorResponse?.localizedDescription ?? "")
             }
+        }
     }
 
     func fetchMyPhotos() {
@@ -49,17 +72,23 @@ class VKAPIService {
             }
     }
 
-    func fetchMyGroups() {
+    func fetchMyGroups(completion: @escaping ([VKGroup]) -> Void) {
         let path = Constants.getGroupsPathString
         let parameters: Parameters = [
             Constants.accessTokenFieldName: apiAccessToken,
             Constants.userIdFieldName: apiUserId,
-            Constants.versionFieldName: apiVersion
+            Constants.versionFieldName: apiVersion,
+            Constants.extendedFieldName: Constants.extendedFieldValue
         ]
         let url = "\(baseUrl)\(path)"
         AF.request(url, method: .post, parameters: parameters)
-            .response { data in
-                debugPrint(data)
+            .responseDecodable { (response: DataResponse<VKAPIResponse<VKGroup>, AFError>) in
+                if let friendsResponse = response.value {
+                    completion(friendsResponse.response.items)
+                } else {
+                    let errorResponse = response.error
+                    print(errorResponse?.localizedDescription ?? "")
+                }
             }
     }
 
@@ -96,5 +125,7 @@ extension VKAPIService {
         static let photoFieldName = "photo_100"
         static let onlineFieldName = "online"
         static let sexFieldName = "sex"
+        static let extendedFieldName = "extended"
+        static let extendedFieldValue = 1
     }
 }
