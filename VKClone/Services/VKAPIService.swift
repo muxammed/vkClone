@@ -3,6 +3,7 @@
 
 import Alamofire
 import Foundation
+import RealmSwift
 
 /// Апи запросы
 class VKAPIService {
@@ -18,7 +19,7 @@ class VKAPIService {
     func downloadImageFrom(urlString: URL, completion: @escaping (UIImage) -> Void) {
         let task = URLSession.shared.dataTask(with: urlString) { data, _, error in
             if error != nil {
-                print("ERROR \(String(describing: error))")
+                print(error ?? "")
             }
             guard let data = data,
                   let downloadedImage = UIImage(data: data) else { return }
@@ -27,7 +28,7 @@ class VKAPIService {
         task.resume()
     }
 
-    func fetchMyFriends(completion: @escaping ([VKFriend]) -> Void) {
+    func fetchMyFriends(completion: @escaping (Bool) -> Void) {
         apiAccessToken = Session.shared.token
         apiUserId = Session.shared.userId
         let path = Constants.friendsGetPathString
@@ -43,18 +44,64 @@ class VKAPIService {
             ]
         ]
         let url = "\(baseUrl)\(path)"
+        print(url)
+        print(parameters)
         AF.request(
             url,
             method: .post,
             parameters: parameters
         )
         .responseDecodable { (response: DataResponse<VKAPIResponse<VKFriend>, AFError>) in
+            print(response)
             if let friendsResponse = response.value {
-                completion(friendsResponse.response.items)
+                completion(self.saveMyFriends(friends: friendsResponse.response.items))
+
             } else {
                 let errorResponse = response.error
                 print(errorResponse?.localizedDescription ?? "")
             }
+        }
+    }
+
+    func clearFriendsFromDB() -> Bool {
+        do {
+            let realm = try Realm()
+            let friends = realm.objects(VKFriend.self)
+            realm.beginWrite()
+            realm.delete(friends)
+            try realm.commitWrite()
+            return true
+        } catch {
+            print(error)
+            return false
+        }
+    }
+
+    func loadMyFriendsFromDB() -> [VKFriend] {
+        do {
+            let realm = try Realm()
+            let friends = realm.objects(VKFriend.self)
+            return Array(friends)
+        } catch {
+            print(error)
+            return []
+        }
+    }
+
+    func saveMyFriends(friends: [VKFriend]) -> Bool {
+        if clearFriendsFromDB() {
+            do {
+                let realm = try Realm()
+                realm.beginWrite()
+                realm.add(friends)
+                try realm.commitWrite()
+                return true
+            } catch {
+                print(error)
+                return false
+            }
+        } else {
+            return false
         }
     }
 

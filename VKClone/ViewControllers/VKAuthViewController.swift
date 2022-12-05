@@ -98,6 +98,8 @@ extension VKAuthViewController: WKNavigationDelegate {
         let userId = params[Constants.userId]
         Session.shared.userId = userId ?? ""
         Session.shared.token = token ?? ""
+        UserDefaults.standard.set(token ?? "", forKey: Constants.accessToken)
+        UserDefaults.standard.set(userId ?? "", forKey: Constants.userId)
         apiService.apiAccessToken = token ?? ""
         apiService.apiUserId = userId ?? ""
         authWebView.removeFromSuperview()
